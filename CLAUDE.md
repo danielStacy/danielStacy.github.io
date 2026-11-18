@@ -31,11 +31,11 @@ Daniel is a CS graduate with solid JavaScript fundamentals (ES6+, async, DOM) an
 | Styling | Plain CSS with custom properties (design tokens) plus Astro scoped styles | Standard, framework-free, easy to learn properly. No Tailwind |
 | Articles | Markdown by default, MDX only for articles that need interactive pieces | Keeps most posts simple |
 | Interactivity | Astro islands, only where needed; framework (React vs Svelte vs vanilla) undecided | Decide when the first interactive feature is real |
-| Fonts | Self-hosted (e.g. via Fontsource) | Performance and privacy, consistent with no tracking |
+| Fonts | Self-hosted via Fontsource: Libre Caslon Text (headlines, body), IBM Plex Sans Variable (navigation, metadata), Playfair Display 800 (masthead wordmark only) | Performance and privacy, consistent with no tracking |
 | Hosting | GitHub Pages, built and deployed by GitHub Actions, from a public repository | Free; may move elsewhere later |
 | Node | Current LTS (26), managed with nvm, pinned in `.nvmrc` and `engines` | Reproducible |
 
-Dependency policy: well-known, maintained libraries are fine, but ask before adding any (see above) and record why in `docs/decisions.md`.
+Dependency policy: well-known, maintained libraries are fine, but ask before adding any (see above).
 
 Data work (Python, pandas, Parquet, Tableau) happens outside this site. This repo consumes finished outputs: images, small JSON/CSV files, or embeds. Interactive charts, if added later, should be loaded only on the articles that use them.
 
@@ -61,7 +61,7 @@ Home page: short about-me section, one featured article, then the three most rec
 
 - Reference: The New York Times website: clean, minimal, editorial. Mood: modern editorial, minimal, serious/academic, with a little playfulness. Subtle motion only, and respect `prefers-reduced-motion`.
 - Elements: masthead with the site name (Daniel Stacy), thin rules between sections, strong typographic hierarchy. Skip drop caps, date lines and multi-column front pages unless proposed and approved.
-- Typography: a serif for headlines and article body, a clean sans for navigation and metadata. Specific fonts are to be proposed in the design phase.
+- Typography: Libre Caslon Text for headlines and article body, IBM Plex Sans for navigation and metadata, Playfair Display for the masthead wordmark. Caslon has only 400, 400 italic and 700, so don't use other weights or bold italic.
 - Colour: black, off-white, and one or two subtle accents, defined as CSS custom properties with light and dark variants. Contrast must meet WCAG AA in both themes.
 - Article body is a single readable column (about 60-75 characters per line).
 - No logo yet; the masthead wordmark is the brand.
@@ -97,7 +97,6 @@ Environment: VS Code on Linux (Ubuntu, possibly moving to Debian). Avoid OS-spec
 - Idiomatic code for each language (Astro, TypeScript, CSS). Clear names over clever ones.
 - Avoid excessive comments. Comment the *why* where it isn't obvious, not the *what*.
 - Keep `README.md` current (what the site is, how to run, build and deploy it).
-- Keep `docs/decisions.md` as a short decision log: date, decision, options considered, reason. Add an entry for each architectural decision.
 
 ## Project structure (intended)
 
@@ -109,7 +108,6 @@ src/
   content/      # articles (Markdown/MDX) and content schema
   styles/       # tokens, global styles
 public/         # static assets
-docs/           # decisions.md and other docs
 ```
 
 ## Commands
@@ -129,4 +127,4 @@ Add lint, format and check commands when that tooling is set up.
 
 - Custom domain, and a budget for domain and hosting (research needed).
 - Which UI framework, if any, for interactive pieces.
-- Final fonts and colour palette.
+- Final colour palette.
