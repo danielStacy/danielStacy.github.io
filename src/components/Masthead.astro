@@ -9,7 +9,7 @@ const navItems = [
 ---
 
 <header class="masthead">
-	<p class="wordmark"><a href="/">Daniel Stacy</a></p>
+	<p class="wordmark"><a href="/"><span class="wordmark__ink">Daniel Stacy</span></a></p>
 	<p class="tagline">Data analysis on public Australian datasets</p>
 	<nav aria-label="Main">
 		<ul>
@@ -37,6 +37,27 @@ const navItems = [
 		font-weight: 700;
 		letter-spacing: -0.02em;
 		line-height: 1;
+	}
+
+	/*
+	 * Black letters with dark grey grain, painted as a background and clipped to the text. Same noise
+	 * as the page grain. In the colour matrix, the 0.4 constants set the speck grey (sRGB, so 0.4 is
+	 * about #666) and 0.4 × noise sets its strength. On an inner span so the link's focus outline is
+	 * unaffected.
+	 */
+	.wordmark__ink {
+		color: transparent;
+		background-color: var(--ink);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+		-webkit-background-clip: text;
+		background-clip: text;
+	}
+
+	@media (forced-colors: active), (prefers-contrast: more), print {
+		.wordmark__ink {
+			color: var(--ink);
+			background: none;
+		}
 	}
 
 	.tagline {
