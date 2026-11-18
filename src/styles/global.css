@@ -1,0 +1,59 @@
+/* Greyscale and system fonts are placeholders until the typography and colour phase. */
+:root {
+	--ink: #121212;
+	--paper: #faf9f6;
+	--muted: #5c5c5c;
+	--rule: #d6d3cc;
+	--serif: ui-serif, Georgia, 'Times New Roman', serif;
+	--sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--page-width: 72rem;
+	--gutter: 1rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--serif);
+	line-height: 1.5;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	line-height: 1.15;
+}
+
+p {
+	margin: 0;
+}
+
+.kicker {
+	font-family: var(--sans);
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.meta {
+	font-family: var(--sans);
+	font-size: 0.8rem;
+	color: var(--muted);
+}

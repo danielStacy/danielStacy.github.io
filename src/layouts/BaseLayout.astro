@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = 'Data analysis on public Australian datasets, by Daniel Stacy.' } =
+	Astro.props;
+const pageTitle = title ? `${title} · Daniel Stacy` : 'Daniel Stacy';
+---
+
+<html lang="en-AU">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<Masthead />
+		<main>
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: var(--page-width);
+		margin: 0 auto;
+		padding-inline: var(--gutter);
+	}
+</style>

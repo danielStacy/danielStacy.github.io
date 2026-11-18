@@ -1,0 +1,68 @@
+---
+const navItems = [
+	{ href: '/articles/', label: 'Articles' },
+	{ href: '/projects/', label: 'Projects' },
+	{ href: '/about/', label: 'About' },
+	{ href: '/resume/', label: 'Résumé' },
+	{ href: '/contact/', label: 'Contact' },
+];
+---
+
+<header class="masthead">
+	<p class="wordmark"><a href="/">Daniel Stacy</a></p>
+	<p class="tagline">Data analysis on public Australian datasets</p>
+	<nav aria-label="Main">
+		<ul>
+			{
+				navItems.map((item) => (
+					<li>
+						<a href={item.href}>{item.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</header>
+
+<style>
+	.masthead {
+		max-width: var(--page-width);
+		margin: 0 auto;
+		padding: 2.5rem var(--gutter) 0;
+		text-align: center;
+	}
+
+	.wordmark {
+		font-size: clamp(2.75rem, 8vw, 5rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1;
+	}
+
+	.tagline {
+		margin-top: 0.5rem;
+		font-style: italic;
+		color: var(--muted);
+	}
+
+	nav {
+		margin-top: 1.5rem;
+		border-top: 1px solid var(--ink);
+		border-bottom: 3px double var(--ink);
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 2rem;
+		justify-content: center;
+		margin: 0;
+		padding: 0.7rem 0;
+		list-style: none;
+		font-family: var(--sans);
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+</style>
