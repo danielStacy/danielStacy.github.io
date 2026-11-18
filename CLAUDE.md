@@ -114,7 +114,16 @@ docs/           # decisions.md and other docs
 
 ## Commands
 
-Fill in once the project is scaffolded (dev, build, preview, lint, format, check).
+Run `nvm use` first in a new terminal (or rely on `nvm alias default 26`).
+
+| Command | What it does |
+| --- | --- |
+| `pnpm install` | Install dependencies from the lockfile |
+| `pnpm dev` | Dev server at `http://localhost:4321` |
+| `pnpm build` | Production build to `dist/` |
+| `pnpm preview` | Serve the production build locally |
+
+Add lint, format and check commands when that tooling is set up.
 
 ## Open questions
 
