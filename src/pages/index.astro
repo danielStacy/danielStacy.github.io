@@ -1,16 +1,174 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Placeholder articles until the articles content collection exists.
+const featured = {
+	title: 'Who rents in Australia? Reading the Census on housing tenure',
+	description:
+		'Renting is no longer a stage of life for the young. A look at how tenure has shifted by age and city, and the caveats the headline figures hide.',
+	pubDate: new Date('2026-11-02'),
+	tags: ['Housing', 'Census'],
+	readingMinutes: 9,
+};
+
+const recent = [
+	{
+		title: 'What the Labour Force survey can and can’t tell you',
+		description: 'Seasonal adjustment, trend series and sample error, explained with one month of data.',
+		pubDate: new Date('2026-10-05'),
+		tags: ['Employment', 'Methods'],
+	},
+	{
+		title: 'Mapping a century of fire weather',
+		description: 'Using Bureau of Meteorology station data to see how fire danger seasons have lengthened.',
+		pubDate: new Date('2026-09-07'),
+		tags: ['Climate'],
+	},
+	{
+		title: 'Commute times across the capital cities',
+		description: 'Where the longest trips are, and why averages flatter the outer suburbs.',
+		pubDate: new Date('2026-08-03'),
+		tags: ['Transport', 'Census'],
+	},
+];
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<html lang="en-AU">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Daniel Stacy</title>
-	</head>
-	<body>
-		<h1>Daniel Stacy</h1>
-	</body>
-</html>
+<BaseLayout>
+	<section class="about">
+		<p>
+			I’m a data analyst who writes about public datasets: what they say, what they leave out, and
+			how to read them carefully.
+		</p>
+		<a class="meta" href="/about/">More about me →</a>
+	</section>
+
+	<article class="featured">
+		<div class="cover">Cover image</div>
+		<div class="featured__text">
+			<p class="kicker">Featured · {featured.tags.join(', ')}</p>
+			<h1><a href="#">{featured.title}</a></h1>
+			<p class="featured__description">{featured.description}</p>
+			<p class="meta">{formatDate(featured.pubDate)} · {featured.readingMinutes} min read</p>
+		</div>
+	</article>
+
+	<section class="recent">
+		<h2 class="kicker">Recent articles</h2>
+		<div class="recent__grid">
+			{
+				recent.map((article) => (
+					<article>
+						<p class="kicker">{article.tags[0]}</p>
+						<h3>
+							<a href="#">{article.title}</a>
+						</h3>
+						<p>{article.description}</p>
+						<p class="meta">{formatDate(article.pubDate)}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.about {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+		align-items: baseline;
+		justify-content: center;
+		padding: 1.25rem 0;
+		border-bottom: 1px solid var(--rule);
+		text-align: center;
+	}
+
+	.featured {
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		gap: 2rem;
+		padding: 2rem 0;
+		border-bottom: 1px solid var(--ink);
+	}
+
+	/* Stand-in until real cover images exist. */
+	.cover {
+		display: grid;
+		place-items: center;
+		aspect-ratio: 3 / 2;
+		background: repeating-linear-gradient(45deg, #ebe8e1 0 12px, #e3dfd7 12px 24px);
+		color: var(--muted);
+		font-family: var(--sans);
+		font-size: 0.75rem;
+	}
+
+	.featured__text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	.featured h1 {
+		font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+	}
+
+	.featured__description {
+		font-size: 1.15rem;
+		color: var(--muted);
+	}
+
+	.recent {
+		padding: 1.5rem 0 2rem;
+	}
+
+	.recent__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		margin-top: 1rem;
+	}
+
+	.recent article {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-inline: 1.5rem;
+	}
+
+	.recent article:first-child {
+		padding-left: 0;
+	}
+
+	.recent article:last-child {
+		padding-right: 0;
+	}
+
+	.recent article + article {
+		border-left: 1px solid var(--rule);
+	}
+
+	.recent h3 {
+		font-size: 1.3rem;
+	}
+
+	@media (max-width: 48rem) {
+		.featured,
+		.recent__grid {
+			grid-template-columns: 1fr;
+		}
+
+		.recent article,
+		.recent article:first-child,
+		.recent article:last-child {
+			padding: 1rem 0;
+		}
+
+		.recent article + article {
+			border-left: 0;
+			border-top: 1px solid var(--rule);
+		}
+	}
+</style>
