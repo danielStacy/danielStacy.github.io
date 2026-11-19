@@ -3,7 +3,8 @@ const navItems = [
 	{ href: '/articles/', label: 'Articles' },
 	{ href: '/projects/', label: 'Projects' },
 	{ href: '/about/', label: 'About' },
-	{ href: '/resume/', label: 'Résumé' },
+	// The accented accessible name makes screen readers say the noun, not the verb "resume".
+	{ href: '/resume/', label: 'Resume', ariaLabel: 'Résumé' },
 	{ href: '/contact/', label: 'Contact' },
 ];
 ---
@@ -19,7 +20,9 @@ const navItems = [
 		<ul>
 			{navItems.map((item) => (
 				<li>
-					<a href={item.href}>{item.label}</a>
+					<a href={item.href} aria-label={item.ariaLabel}>
+						{item.label}
+					</a>
 				</li>
 			))}
 		</ul>
