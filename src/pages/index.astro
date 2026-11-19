@@ -14,13 +14,15 @@ const featured = {
 const recent = [
 	{
 		title: 'What the Labour Force survey can and can’t tell you',
-		description: 'Seasonal adjustment, trend series and sample error, explained with one month of data.',
+		description:
+			'Seasonal adjustment, trend series and sample error, explained with one month of data.',
 		pubDate: new Date('2026-10-05'),
 		tags: ['Employment', 'Methods'],
 	},
 	{
 		title: 'Mapping a century of fire weather',
-		description: 'Using Bureau of Meteorology station data to see how fire danger seasons have lengthened.',
+		description:
+			'Using Bureau of Meteorology station data to see how fire danger seasons have lengthened.',
 		pubDate: new Date('2026-09-07'),
 		tags: ['Climate'],
 	},
@@ -42,34 +44,38 @@ const formatDate = (date: Date) =>
 			I’m a data analyst who writes about public datasets: what they say, what they leave out, and
 			how to read them carefully.
 		</p>
-		<a class="meta" href="/about/">More about me →</a>
+		<a class="meta" href="/about/">
+			More about me →
+		</a>
 	</section>
 
 	<article class="featured">
 		<div class="cover">Cover image</div>
 		<div class="featured__text">
 			<p class="kicker">Featured · {featured.tags.join(', ')}</p>
-			<h1><a href="#">{featured.title}</a></h1>
+			<h1>
+				<a href="#">{featured.title}</a>
+			</h1>
 			<p class="featured__description">{featured.description}</p>
-			<p class="meta">{formatDate(featured.pubDate)} · {featured.readingMinutes} min read</p>
+			<p class="meta">
+				{formatDate(featured.pubDate)} · {featured.readingMinutes} min read
+			</p>
 		</div>
 	</article>
 
 	<section class="recent">
 		<h2 class="kicker">Recent articles</h2>
 		<div class="recent__grid">
-			{
-				recent.map((article) => (
-					<article>
-						<p class="kicker">{article.tags[0]}</p>
-						<h3>
-							<a href="#">{article.title}</a>
-						</h3>
-						<p>{article.description}</p>
-						<p class="meta">{formatDate(article.pubDate)}</p>
-					</article>
-				))
-			}
+			{recent.map((article) => (
+				<article>
+					<p class="kicker">{article.tags[0]}</p>
+					<h3>
+						<a href="#">{article.title}</a>
+					</h3>
+					<p>{article.description}</p>
+					<p class="meta">{formatDate(article.pubDate)}</p>
+				</article>
+			))}
 		</div>
 	</section>
 </BaseLayout>

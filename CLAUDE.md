@@ -23,17 +23,17 @@ Daniel is a CS graduate with solid JavaScript fundamentals (ES6+, async, DOM) an
 
 ## Stack (confirmed 2026-11-17)
 
-| Area | Choice | Why |
-| --- | --- | --- |
-| Framework | Astro, static output | Content site, minimal JS |
-| Language | TypeScript, Astro's `strict` template, light annotations | Editor help and typed content schemas; `astro check` available |
-| Package manager | pnpm | Strict dependency resolution, and lifecycle scripts from dependencies are off by default, in line with wanting something more minimal and secure |
-| Styling | Plain CSS with custom properties (design tokens) plus Astro scoped styles | Standard, framework-free, easy to learn properly. No Tailwind |
-| Articles | Markdown by default, MDX only for articles that need interactive pieces | Keeps most posts simple |
-| Interactivity | Astro islands, only where needed; framework (React vs Svelte vs vanilla) undecided | Decide when the first interactive feature is real |
-| Fonts | Self-hosted via Fontsource: Libre Caslon Text (headlines, body), IBM Plex Sans Variable (navigation, metadata), Playfair Display 800 (masthead wordmark only) | Performance and privacy, consistent with no tracking |
-| Hosting | GitHub Pages, built and deployed by GitHub Actions, from a public repository | Free; may move elsewhere later |
-| Node | Current LTS (26), managed with nvm, pinned in `.nvmrc` and `engines` | Reproducible |
+| Area            | Choice                                                                                                                                                        | Why                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Framework       | Astro, static output                                                                                                                                          | Content site, minimal JS                                                                                                                         |
+| Language        | TypeScript, Astro's `strict` template, light annotations                                                                                                      | Editor help and typed content schemas; `astro check` available                                                                                   |
+| Package manager | pnpm                                                                                                                                                          | Strict dependency resolution, and lifecycle scripts from dependencies are off by default, in line with wanting something more minimal and secure |
+| Styling         | Plain CSS with custom properties (design tokens) plus Astro scoped styles                                                                                     | Standard, framework-free, easy to learn properly. No Tailwind                                                                                    |
+| Articles        | Markdown by default, MDX only for articles that need interactive pieces                                                                                       | Keeps most posts simple                                                                                                                          |
+| Interactivity   | Astro islands, only where needed; framework (React vs Svelte vs vanilla) undecided                                                                            | Decide when the first interactive feature is real                                                                                                |
+| Fonts           | Self-hosted via Fontsource: Libre Caslon Text (headlines, body), IBM Plex Sans Variable (navigation, metadata), Playfair Display 800 (masthead wordmark only) | Performance and privacy, consistent with no tracking                                                                                             |
+| Hosting         | GitHub Pages, built and deployed by GitHub Actions, from a public repository                                                                                  | Free; may move elsewhere later                                                                                                                   |
+| Node            | Current LTS (26), managed with nvm, pinned in `.nvmrc` and `engines`                                                                                          | Reproducible                                                                                                                                     |
 
 Dependency policy: well-known, maintained libraries are fine, but ask before adding any (see above).
 
@@ -95,7 +95,7 @@ Environment: VS Code on Linux (Ubuntu, possibly moving to Debian). Avoid OS-spec
 ## Code and documentation style
 
 - Idiomatic code for each language (Astro, TypeScript, CSS). Clear names over clever ones.
-- Avoid excessive comments. Comment the *why* where it isn't obvious, not the *what*.
+- Avoid excessive comments. Comment the _why_ where it isn't obvious, not the _what_.
 - Keep `README.md` current (what the site is, how to run, build and deploy it).
 
 ## Project structure (intended)
@@ -114,14 +114,18 @@ public/         # static assets
 
 Run `nvm use` first in a new terminal (or rely on `nvm alias default 26`).
 
-| Command | What it does |
-| --- | --- |
-| `pnpm install` | Install dependencies from the lockfile |
-| `pnpm dev` | Dev server at `http://localhost:4321` |
-| `pnpm build` | Production build to `dist/` |
-| `pnpm preview` | Serve the production build locally |
+| Command             | What it does                                         |
+| ------------------- | ---------------------------------------------------- |
+| `pnpm install`      | Install dependencies and the pre-commit hook         |
+| `pnpm dev`          | Dev server at `http://localhost:4321`                |
+| `pnpm build`        | Production build to `dist/`                          |
+| `pnpm preview`      | Serve the production build locally                   |
+| `pnpm lint`         | Lint with ESLint                                     |
+| `pnpm format`       | Format all files with Prettier                       |
+| `pnpm format:check` | Report files Prettier would change, without changing |
+| `pnpm check`        | Type-check with `astro check`                        |
 
-Add lint, format and check commands when that tooling is set up.
+The pre-commit hook runs ESLint and Prettier on staged files only.
 
 ## Open questions
 
