@@ -18,7 +18,7 @@ Daniel is a CS graduate with solid JavaScript fundamentals (ES6+, async, DOM) an
 - **Explanation depth:** when introducing a new tool or concept, give a short paragraph with an example. Give a thorough explanation with doc links only when asked. Daniel will say per task whether he wants "explain as you go" or "do it, then summarise".
 - **Push back** on over-engineering, poor naming and skipped tests. Don't add features that aren't on the list below; the goal is a small, polished site, not a large one.
 - **Never do these without asking:** add or upgrade dependencies, delete files, change the design system, modify article content, change config files, push to the remote.
-- **Git:** never commit or push. Suggest the branch name and a Conventional Commits message (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`), and Daniel will commit.
+- **Git:** never commit or push. Suggest the branch name and a Conventional Commits message (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`, `ci:`), and Daniel will commit.
 - Article text: help edit only when asked. Flag articles that run long, since short and clear is the aim.
 
 ## Stack (confirmed 2026-11-17)
@@ -80,7 +80,7 @@ Set up: ESLint, Prettier, EditorConfig, pre-commit hooks (Husky + lint-staged), 
 
 Testing is proportionate to a content site: the build must succeed and internal links must not be broken. Vitest and Playwright are maybe-later learning goals; suggest them when there is something worth testing.
 
-CI/CD (GitHub Actions: install, lint, check, build, deploy to Pages) is an explicit learning goal, but Daniel wants to defer it until the site basics exist. Raise it again once the first pages build.
+CI/CD runs in `.github/workflows/ci.yml` (GitHub Actions): every pull request and push to `main` installs, lints, checks formatting and types, and builds; pushes to `main` then deploy to GitHub Pages at `https://danielstacy.github.io/`.
 
 Environment: VS Code on Linux (Ubuntu, possibly moving to Debian). Avoid OS-specific commands where a portable one exists.
 
