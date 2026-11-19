@@ -114,14 +114,18 @@ public/         # static assets
 
 Run `nvm use` first in a new terminal (or rely on `nvm alias default 26`).
 
-| Command        | What it does                           |
-| -------------- | -------------------------------------- |
-| `pnpm install` | Install dependencies from the lockfile |
-| `pnpm dev`     | Dev server at `http://localhost:4321`  |
-| `pnpm build`   | Production build to `dist/`            |
-| `pnpm preview` | Serve the production build locally     |
+| Command             | What it does                                         |
+| ------------------- | ---------------------------------------------------- |
+| `pnpm install`      | Install dependencies and the pre-commit hook         |
+| `pnpm dev`          | Dev server at `http://localhost:4321`                |
+| `pnpm build`        | Production build to `dist/`                          |
+| `pnpm preview`      | Serve the production build locally                   |
+| `pnpm lint`         | Lint with ESLint                                     |
+| `pnpm format`       | Format all files with Prettier                       |
+| `pnpm format:check` | Report files Prettier would change, without changing |
+| `pnpm check`        | Type-check with `astro check`                        |
 
-Add lint, format and check commands when that tooling is set up.
+The pre-commit hook runs ESLint and Prettier on staged files only.
 
 ## Open questions
 
