@@ -105,7 +105,11 @@ const formatDate = (date: Date) =>
 		display: grid;
 		place-items: center;
 		aspect-ratio: 3 / 2;
-		background: repeating-linear-gradient(45deg, #ebe8e1 0 12px, #e3dfd7 12px 24px);
+		background: repeating-linear-gradient(
+			45deg,
+			light-dark(#ebe8e1, #1c1c1b) 0 12px,
+			light-dark(#e3dfd7, #252524) 12px 24px
+		);
 		color: var(--muted);
 		font-family: var(--sans);
 		font-size: 0.75rem;

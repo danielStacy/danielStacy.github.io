@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const navItems = [
 	{ href: '/articles/', label: 'Articles' },
 	{ href: '/projects/', label: 'Projects' },
@@ -10,6 +12,9 @@ const navItems = [
 ---
 
 <header class="masthead">
+	<div class="masthead__utility">
+		<ThemeToggle />
+	</div>
 	<p class="wordmark">
 		<a href="/">
 			<span class="wordmark__ink">Daniel Stacy</span>
@@ -33,11 +38,19 @@ const navItems = [
 	.masthead {
 		max-width: var(--page-width);
 		margin: 0 auto;
-		padding: 2.5rem var(--gutter) 0;
+		padding: 0.75rem var(--gutter) 0;
 		text-align: center;
 	}
 
+	/* Reserves the toggle's height even while it is hidden, so showing it doesn't shift the page. */
+	.masthead__utility {
+		display: flex;
+		justify-content: flex-end;
+		min-height: 1.5rem;
+	}
+
 	.wordmark {
+		margin-top: 0.5rem;
 		font-family: 'Playfair Display', var(--serif);
 		font-size: clamp(2.75rem, 10vw, 7rem);
 		font-weight: 800;
@@ -46,15 +59,13 @@ const navItems = [
 	}
 
 	/*
-	 * Black letters with dark grey grain, painted as a background and clipped to the text. Same noise
-	 * as the page grain. In the colour matrix, the 0.4 constants set the speck grey (sRGB, so 0.4 is
-	 * about #666) and 0.4 × noise sets its strength. On an inner span so the link's focus outline is
-	 * unaffected.
+	 * Ink colour and grain, painted as a background and clipped to the text. On an inner span so the
+	 * link's focus outline is unaffected.
 	 */
 	.wordmark__ink {
 		color: transparent;
 		background-color: var(--ink);
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+		background-image: var(--ink-grain);
 		-webkit-background-clip: text;
 		background-clip: text;
 	}

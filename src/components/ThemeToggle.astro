@@ -1,0 +1,96 @@
+<!-- Hidden until the script runs: without JavaScript the site follows the system setting. -->
+<button class="theme-toggle" type="button" aria-pressed="false" hidden>
+	<svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+		<circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+		<path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path>
+	</svg>
+	Dark mode
+</button>
+
+<script>
+	type Theme = 'light' | 'dark';
+
+	const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+	const root = document.documentElement;
+	const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+	const systemTheme = (): Theme => (systemDark.matches ? 'dark' : 'light');
+	const currentTheme = (): Theme => (root.dataset.theme as Theme | undefined) ?? systemTheme();
+
+	function saveTheme(theme: Theme | null) {
+		try {
+			if (theme) localStorage.setItem('theme', theme);
+			else localStorage.removeItem('theme');
+		} catch {
+			// Storage can be blocked; the choice then lasts until the page is left.
+		}
+	}
+
+	function syncButton() {
+		button?.setAttribute('aria-pressed', String(currentTheme() === 'dark'));
+	}
+
+	if (button) {
+		button.hidden = false;
+		syncButton();
+
+		button.addEventListener('click', () => {
+			const next: Theme = currentTheme() === 'dark' ? 'light' : 'dark';
+			// Choosing what the system already uses clears the override, so later system changes apply.
+			if (next === systemTheme()) {
+				delete root.dataset.theme;
+				saveTheme(null);
+			} else {
+				root.dataset.theme = next;
+				saveTheme(next);
+			}
+			syncButton();
+		});
+
+		systemDark.addEventListener('change', syncButton);
+	}
+</script>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		gap: 0.4rem;
+		align-items: center;
+		min-height: 1.5rem;
+		padding: 0 0.25rem;
+		border: 0;
+		background: none;
+		color: var(--muted);
+		font-family: var(--sans);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+
+	/* The display rule above would otherwise override the hidden attribute. */
+	.theme-toggle[hidden] {
+		display: none;
+	}
+
+	.theme-toggle:hover {
+		color: var(--ink);
+	}
+
+	.theme-toggle__icon {
+		width: 0.9rem;
+		height: 0.9rem;
+	}
+
+	/* Flip the filled half to show the state; a little motion, only for those who haven't opted out. */
+	[aria-pressed='true'] .theme-toggle__icon {
+		transform: rotate(180deg);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.theme-toggle__icon {
+			transition: transform 0.3s ease;
+		}
+	}
+</style>

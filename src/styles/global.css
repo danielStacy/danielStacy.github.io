@@ -1,15 +1,57 @@
-/* Greyscale colours are placeholders until the colour phase. */
+/*
+ * Greyscale colours are placeholders until the colour phase. Each colour is light-dark(light, dark),
+ * resolved by color-scheme: the system setting by default, or data-theme when the visitor has chosen.
+ * Dark mode swaps ink and paper, grain included.
+ */
 :root {
-	--ink: #121212;
-	--paper: #faf9f6;
-	--muted: #5c5c5c;
-	--rule: #d6d3cc;
+	color-scheme: light dark;
+	--ink: light-dark(#121212, #faf9f6);
+	--paper: light-dark(#faf9f6, #121212);
+	--muted: light-dark(#5c5c5c, #a3a19c);
+	--rule: light-dark(#d6d3cc, #3a3936);
 	--serif: 'Libre Caslon Text', ui-serif, Georgia, 'Times New Roman', serif;
 	--sans: 'IBM Plex Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	/* Tiled SVG noise for a paper-like texture; the 0.09 in the colour matrix sets its strength. */
-	--grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	/*
+	 * Tiled SVG noise. In each colour matrix the second-last value sets strength; in the coarse grains
+	 * the 0.4 or 0.35 constants set the speck grey (sRGB, so about #666 or #595959). Strength and colour
+	 * are baked into each image, so dark mode has its own copies.
+	 */
+	--grain-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--grain-fine-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--grain-coarse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--grain-coarse-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--paper-grain: var(--grain-fine);
+	--ink-grain: var(--grain-coarse);
 	--page-width: 72rem;
 	--gutter: 1rem;
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+/* light-dark() only accepts colours, so the grain images are swapped with selectors. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--paper-grain: var(--grain-coarse-dark);
+		--ink-grain: var(--grain-fine-dark);
+	}
+}
+
+:root[data-theme='dark'] {
+	--paper-grain: var(--grain-coarse-dark);
+	--ink-grain: var(--grain-fine-dark);
+}
+
+@media print {
+	:root,
+	:root[data-theme='dark'] {
+		color-scheme: light;
+	}
 }
 
 *,
@@ -21,7 +63,7 @@
 body {
 	margin: 0;
 	background-color: var(--paper);
-	background-image: var(--grain);
+	background-image: var(--paper-grain);
 	color: var(--ink);
 	font-family: var(--serif);
 	line-height: 1.5;
@@ -34,6 +76,12 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+/* Browser focus rings vary and can be faint on dark backgrounds; ink contrasts in both themes. */
+:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
 }
 
 h1,
