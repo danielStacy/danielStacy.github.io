@@ -1,6 +1,6 @@
 # Daniel Stacy: (new) Homepage
 
-Source for my personal website. Hosts my resume, data analysis projetcs, and articles about them. Built with [Astro](https://astro.build/) as a static site and hosted on GitHub Pages.
+Source for my personal website. Hosts my resume, data analysis projects, and articles about them. Built with [Astro](https://astro.build/) as a static site and hosted on GitHub Pages.
 
 ## Prerequisites
 
