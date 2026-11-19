@@ -9,17 +9,19 @@ const navItems = [
 ---
 
 <header class="masthead">
-	<p class="wordmark"><a href="/"><span class="wordmark__ink">Daniel Stacy</span></a></p>
+	<p class="wordmark">
+		<a href="/">
+			<span class="wordmark__ink">Daniel Stacy</span>
+		</a>
+	</p>
 	<p class="tagline">Data analysis on public Australian datasets</p>
 	<nav aria-label="Main">
 		<ul>
-			{
-				navItems.map((item) => (
-					<li>
-						<a href={item.href}>{item.label}</a>
-					</li>
-				))
-			}
+			{navItems.map((item) => (
+				<li>
+					<a href={item.href}>{item.label}</a>
+				</li>
+			))}
 		</ul>
 	</nav>
 </header>
