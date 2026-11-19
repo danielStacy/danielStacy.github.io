@@ -49,7 +49,7 @@ Data work (Python, pandas, Parquet, Tableau) happens outside this site. This rep
 
 ### Pages
 
-Home, Article, Tag/category pages, About, Contact, Projects, Résumé (CV), 404. Proposed main navigation: Articles, Projects, About, Résumé, Contact, with the masthead linking home.
+Home, Article, Tag/category pages, About, Contact, Projects, Resume (CV), 404. Proposed main navigation: Articles, Projects, About, Resume, Contact, with the masthead linking home.
 
 Home page: short about-me section, one featured article, then the three most recent.
 
