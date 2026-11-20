@@ -97,6 +97,8 @@ Environment: VS Code on Linux (Ubuntu, possibly moving to Debian). Avoid OS-spec
 - Idiomatic code for each language (Astro, TypeScript, CSS). Clear names over clever ones.
 - Avoid excessive comments. Comment the _why_ where it isn't obvious, not the _what_.
 - Keep `README.md` current (what the site is, how to run, build and deploy it).
+- When Daniel makes an architectural or design decision, add an entry to `docs/decisions.md` (newest first: decision, why, trade-offs) in the same branch. Smaller tweaks stay in commit messages.
+- Keep `docs/tools.md` current when a tool is added, removed or reconfigured.
 
 ## Project structure (intended)
 
@@ -108,6 +110,7 @@ src/
   content/      # articles (Markdown/MDX) and content schema
   styles/       # tokens, global styles
 public/         # static assets
+docs/           # decision log and tools overview
 ```
 
 ## Commands
