@@ -2,6 +2,14 @@
 
 Why the site is built the way it is, newest first. Each entry records what was decided, why, and what it costs. When a decision changes, add a new entry and mark the old one as superseded, rather than editing history.
 
+## 2026-11-20: Navigation splits into two rows on phones
+
+**Decision:** Below 36rem wide, the five navigation links sit in two rows, three above two, with thin rules between them. Wider screens keep the single row.
+
+**Why:** The links don't fit on one line on a phone, and letting the browser wrap them gave an unplanned break. Two rows keep every link visible without JavaScript, unlike a scrolling strip, which hides Resume and Contact off-screen, or a menu button, which is too much for five links.
+
+**Trade-offs:** The masthead is one line taller on phones. The 3 + 2 split is fixed in CSS, so adding or removing a link means revisiting it.
+
 ## 2026-11-20: Keep a decision log
 
 **Decision:** Record major decisions in this file, newest first. This reverses an earlier choice not to keep one.
