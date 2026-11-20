@@ -15,16 +15,10 @@ Live at [danielstacy.github.io](https://danielstacy.github.io/).
 nvm install
 ```
 
-## Development tools
+## Documentation
 
-| Tool                                                                                                                                                              | Purpose                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [Prettier](https://prettier.io/) with [prettier-plugin-astro](https://github.com/withastro/prettier-plugin-astro)                                                 | Code formatting                                             |
-| [ESLint](https://eslint.org/) with [typescript-eslint](https://typescript-eslint.io/) and [eslint-plugin-astro](https://ota-meshi.github.io/eslint-plugin-astro/) | Linting for JavaScript, TypeScript and Astro files          |
-| [`@astrojs/check`](https://docs.astro.build/en/reference/cli-reference/#astro-check) with [TypeScript](https://www.typescriptlang.org/)                           | Type checking with `astro check`                            |
-| [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged)                                                          | Runs ESLint and Prettier on staged files before each commit |
-
-TypeScript is held at 6.0 until typescript-eslint and `@astrojs/check` support version 7.
+- [Tools](docs/tools.md): what each tool does and where it's configured
+- [Decisions](docs/decisions.md): why the site is built the way it is
 
 ## Deployment
 
