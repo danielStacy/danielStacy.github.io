@@ -135,5 +135,59 @@ const navItems = [
 		li:nth-child(4) {
 			border-inline-end: 1px solid var(--rule);
 		}
+
+		/*
+		 * Replaces the browser's untinted tap highlight with a shade that follows the theme and feathers
+		 * towards the cell's edges. It's a pseudo-element so the mask fades the shade, not the link text.
+		 */
+		nav a {
+			position: relative;
+			isolation: isolate;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		nav a::before {
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			content: '';
+			background-color: var(--rule);
+			/*
+			 * Each gradient feathers one axis; intersecting them softens all four edges. Fixed widths keep
+			 * the feather narrow, so the shade stays rectangular rather than shrinking to an oval.
+			 */
+			mask-image:
+				linear-gradient(
+					to right,
+					transparent,
+					#000 0.75rem,
+					#000 calc(100% - 0.75rem),
+					transparent
+				),
+				linear-gradient(
+					to bottom,
+					transparent,
+					#000 0.375rem,
+					#000 calc(100% - 0.375rem),
+					transparent
+				);
+			mask-composite: intersect;
+			opacity: 0;
+		}
+
+		nav a:active::before {
+			opacity: 1;
+		}
+
+		/* The shade appears instantly, so the press registers, and fades out on release. */
+		@media (prefers-reduced-motion: no-preference) {
+			nav a::before {
+				transition: opacity 150ms ease-out;
+			}
+
+			nav a:active::before {
+				transition-duration: 0s;
+			}
+		}
 	}
 </style>
