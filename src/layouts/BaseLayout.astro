@@ -44,8 +44,11 @@ const pageTitle = title ? `${title} · Daniel Stacy` : 'Daniel Stacy';
 		<title>{pageTitle}</title>
 	</head>
 	<body>
+		<a class="skip-link" href="#main">
+			Skip to content
+		</a>
 		<Masthead />
-		<main>
+		<main id="main">
 			<slot />
 		</main>
 		<SiteFooter />
@@ -53,6 +56,27 @@ const pageTitle = title ? `${title} · Daniel Stacy` : 'Daniel Stacy';
 </html>
 
 <style>
+	/* Off-screen until focused, so keyboard users can jump past the masthead and nav. */
+	.skip-link {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		z-index: 1;
+		padding: 0.5rem 0.75rem;
+		background: var(--ink);
+		color: var(--paper);
+		font-family: var(--sans);
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		transform: translateY(-200%);
+	}
+
+	.skip-link:focus {
+		transform: none;
+	}
+
 	main {
 		max-width: var(--page-width);
 		margin: 0 auto;
