@@ -92,15 +92,48 @@ const navItems = [
 	ul {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem 2rem;
+		gap: 0.5rem 2rem;
 		justify-content: center;
 		margin: 0;
-		padding: 0.7rem 0;
+		padding: 0.3rem 0;
 		list-style: none;
 		font-family: var(--sans);
 		font-size: 0.8rem;
 		font-weight: 600;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
+	}
+
+	/* Padding on the link, not the list, so the whole area is tappable. */
+	nav a {
+		display: block;
+		padding: 0.4rem 0;
+	}
+
+	/*
+	 * The five links don't fit on one line on a phone, so split them 3 + 2 rather than wherever the
+	 * browser wraps. Six columns let the second row sit centred under the first.
+	 */
+	@media (width < 36rem) {
+		ul {
+			display: grid;
+			grid-template-columns: repeat(6, 1fr);
+			gap: 0.5rem 0;
+			padding: 0.5rem 0;
+		}
+
+		li {
+			grid-column: span 2;
+		}
+
+		li:nth-child(4) {
+			grid-column: 2 / span 2;
+		}
+
+		li:nth-child(1),
+		li:nth-child(2),
+		li:nth-child(4) {
+			border-inline-end: 1px solid var(--rule);
+		}
 	}
 </style>
