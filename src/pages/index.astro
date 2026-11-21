@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate } from '../utils/formatDate';
 
 // Placeholder articles until the articles content collection exists.
 const featured = {
@@ -33,9 +34,6 @@ const recent = [
 		tags: ['Transport', 'Census'],
 	},
 ];
-
-const formatDate = (date: Date) =>
-	date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
 <BaseLayout>
