@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-21: The theme toggle moves into the nav on phones
+
+**Decision:** Below 36rem, the toggle fills the sixth cell of the nav grid, making a 3 × 2 grid, and its own row above the wordmark goes. Wider screens keep the toggle at the top right.
+
+**Why:** The row cost about 32px of height on small screens, and the nav had an empty cell. The visible "Dark mode" label is kept, so the control is clear and voice control can name it.
+
+**Trade-offs:** A setting sits among the links, though outside the link list. The toggle is rendered twice, once per layout, with one shown at a time. At 320px, its label only just fits its cell.
+
 ## 2026-11-20: Articles are a content collection, one folder each
 
 **Decision:** Markdown articles in an Astro content collection, each a folder with its images, published at `/articles/<slug>/`. Tags come from a fixed list. The newest article is featured.

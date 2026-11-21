@@ -1,5 +1,19 @@
+---
+interface Props {
+	/** Fills its container, with the content centred, so it can sit in a grid cell. */
+	stretch?: boolean;
+}
+
+const { stretch = false } = Astro.props;
+---
+
 <!-- Hidden until the script runs: without JavaScript the site follows the system setting. -->
-<button class="theme-toggle" type="button" aria-pressed="false" hidden>
+<button
+	class:list={['theme-toggle', { 'theme-toggle--stretch': stretch }]}
+	type="button"
+	aria-pressed="false"
+	hidden
+>
 	<svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
 		<circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
 		<path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path>
@@ -10,7 +24,8 @@
 <script>
 	type Theme = 'light' | 'dark';
 
-	const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+	// The masthead can render more than one toggle (one per layout), so keep them all in step.
+	const buttons = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
 	const root = document.documentElement;
 	const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -27,8 +42,9 @@
 		}
 	}
 
-	function syncButton() {
-		button?.setAttribute('aria-pressed', String(currentTheme() === 'dark'));
+	function syncButtons() {
+		const pressed = String(currentTheme() === 'dark');
+		buttons.forEach((button) => button.setAttribute('aria-pressed', pressed));
 	}
 
 	function applyTheme(theme: Theme) {
@@ -40,25 +56,25 @@
 			root.dataset.theme = theme;
 			saveTheme(theme);
 		}
-		syncButton();
+		syncButtons();
 	}
 
-	if (button) {
+	function toggleTheme() {
+		const next: Theme = currentTheme() === 'dark' ? 'light' : 'dark';
+		// Cross-fade where supported. Grain images can't be colour-transitioned, but snapshots can.
+		if ('startViewTransition' in document && !reduceMotion.matches) {
+			document.startViewTransition(() => applyTheme(next));
+		} else {
+			applyTheme(next);
+		}
+	}
+
+	buttons.forEach((button) => {
 		button.hidden = false;
-		syncButton();
-
-		button.addEventListener('click', () => {
-			const next: Theme = currentTheme() === 'dark' ? 'light' : 'dark';
-			// Cross-fade where supported. Grain images can't be colour-transitioned, but snapshots can.
-			if ('startViewTransition' in document && !reduceMotion.matches) {
-				document.startViewTransition(() => applyTheme(next));
-			} else {
-				applyTheme(next);
-			}
-		});
-
-		systemDark.addEventListener('change', syncButton);
-	}
+		button.addEventListener('click', toggleTheme);
+	});
+	syncButtons();
+	systemDark.addEventListener('change', syncButtons);
 </script>
 
 <style>
@@ -77,6 +93,15 @@
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		cursor: pointer;
+		/* The icon's turn is the tap feedback, so the browser's grey box isn't needed. */
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.theme-toggle--stretch {
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		padding: 0;
 	}
 
 	/* The display rule above would otherwise override the hidden attribute. */
@@ -84,8 +109,11 @@
 		display: none;
 	}
 
-	.theme-toggle:hover {
-		color: var(--ink);
+	/* Only where hovering is possible; touch screens would leave the colour stuck after a tap. */
+	@media (hover: hover) {
+		.theme-toggle:hover {
+			color: var(--ink);
+		}
 	}
 
 	.theme-toggle__icon {

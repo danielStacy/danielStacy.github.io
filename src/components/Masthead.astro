@@ -31,6 +31,10 @@ const navItems = [
 				</li>
 			))}
 		</ul>
+		<!-- Phones only: completes the nav's second row, so the toggle needs no row of its own. -->
+		<div class="nav__toggle">
+			<ThemeToggle stretch />
+		</div>
 	</nav>
 </header>
 
@@ -47,6 +51,10 @@ const navItems = [
 		display: flex;
 		justify-content: flex-end;
 		min-height: 1.5rem;
+	}
+
+	.nav__toggle {
+		display: none;
 	}
 
 	.wordmark {
@@ -110,30 +118,56 @@ const navItems = [
 		padding: 0.4rem 0;
 	}
 
+	/* Touch screens treat a tap as a hover, which would leave the underline stuck after tapping. */
+	@media (hover: none) {
+		nav a:hover {
+			text-decoration: none;
+		}
+	}
+
 	/*
-	 * The five links don't fit on one line on a phone, so split them 3 + 2 rather than wherever the
-	 * browser wraps. Six columns let the second row sit centred under the first.
+	 * The five links don't fit on one line on a phone, so lay them out 3 + 2 rather than wherever the
+	 * browser wraps. The theme toggle fills the sixth cell.
 	 */
 	@media (width < 36rem) {
 		ul {
 			display: grid;
-			grid-template-columns: repeat(6, 1fr);
+			grid-template-columns: repeat(3, 1fr);
 			gap: 0.5rem 0;
 			padding: 0.5rem 0;
 		}
 
-		li {
-			grid-column: span 2;
-		}
-
-		li:nth-child(4) {
-			grid-column: 2 / span 2;
-		}
-
-		li:nth-child(1),
-		li:nth-child(2),
-		li:nth-child(4) {
+		/* Rules between cells; the third ends the first row. */
+		li:not(:nth-child(3)) {
 			border-inline-end: 1px solid var(--rule);
+		}
+
+		/* The toggle moves into the nav, so its row above the wordmark goes. */
+		.masthead__utility {
+			display: none;
+		}
+
+		/*
+		 * The toggle isn't a link, so it sits outside the list. The list and the toggle share one grid
+		 * cell, and the toggle is placed over the list's empty last cell: one column wide, the height
+		 * of a link (2rem), and lifted by the list's bottom padding.
+		 */
+		nav {
+			display: grid;
+		}
+
+		ul,
+		.nav__toggle {
+			grid-area: 1 / 1;
+		}
+
+		.nav__toggle {
+			display: block;
+			align-self: end;
+			justify-self: end;
+			width: calc(100% / 3);
+			height: 2rem;
+			margin-block-end: 0.5rem;
 		}
 
 		/*
