@@ -41,11 +41,11 @@ Data work (Python, pandas, Parquet, Tableau) happens outside this site. This rep
 
 ## Features
 
-**In scope:** Tags/categories, series (multi-part articles), reading time, footnotes, image optimisation (`astro:assets`), dark mode (follows system setting, plus a manual toggle that avoids a flash of the wrong theme), 404 page.
+**In scope:** Tags/categories, footnotes, image optimisation (`astro:assets`), dark mode (follows system setting, plus a manual toggle that avoids a flash of the wrong theme), 404 page.
 
 **Maybe later (don't build unprompted):** filter by category/date once there are many articles, interactive charts, custom domain, privacy-friendly analytics, RSS/sitemap, Open Graph cards, unit and end-to-end tests, newsletter.
 
-**Not wanted:** comments, multi-author support, anything unnecessary.
+**Not wanted:** comments, multi-author support, reading time, series, anything unnecessary.
 
 ### Pages
 
@@ -55,7 +55,7 @@ Home page: short about-me section, one featured article, then the three most rec
 
 ### Article frontmatter
 
-`title`, `description`, `pubDate`, `tags`, `cover` (image) with `coverAlt`. Add `series` and `seriesOrder` when the first series exists. Define this as a typed content collection schema (Zod), and the build should fail on invalid frontmatter.
+`title`, `description`, `pubDate`, `tags`, `cover` (image) with `coverAlt`, all required. The Zod schema is in `src/content.config.ts`, and the build fails on invalid frontmatter. Tags must come from the fixed list in `src/content/tags.ts`. Each article is a folder (`src/content/articles/<slug>/index.md` plus its images), published at `/articles/<slug>/`. The newest article is the featured one.
 
 ## Design
 
@@ -99,6 +99,7 @@ Environment: VS Code on Linux (Ubuntu, possibly moving to Debian). Avoid OS-spec
 - Keep `README.md` current (what the site is, how to run, build and deploy it).
 - When Daniel makes an architectural or design decision, add an entry to `docs/decisions.md` (newest first: decision, why, trade-offs) in the same branch. Smaller tweaks stay in commit messages.
 - Keep `docs/tools.md` current when a tool is added, removed or reconfigured.
+- Keep `docs/adding-an-article.md` and `docs/article-template.md` current when the article schema, tags or publishing process change.
 
 ## Project structure (intended)
 
@@ -107,7 +108,7 @@ src/
   pages/        # routes
   layouts/      # page shells (masthead, footer)
   components/   # reusable pieces
-  content/      # articles (Markdown/MDX) and content schema
+  content/      # articles (a folder each) and the tag list; schema in src/content.config.ts
   styles/       # tokens, global styles
 public/         # static assets
 docs/           # decision log and tools overview

@@ -1,102 +1,99 @@
 # Decisions
 
-Why the site is built the way it is, newest first. Each entry records what was decided, why, and what it costs. When a decision changes, add a new entry and mark the old one as superseded, rather than editing history.
+Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
+
+## 2026-11-20: Articles are a content collection, one folder each
+
+**Decision:** Markdown articles in an Astro content collection, each a folder with its images, published at `/articles/<slug>/`. Tags come from a fixed list. The newest article is featured.
+
+**Why:** Images stay beside their text, URLs stay short, and a tag typo fails the build instead of creating a duplicate tag.
+
+**Trade-offs:** New tags need adding to the list. Slugs can't change without breaking links.
 
 ## 2026-11-20: Navigation splits into two rows on phones
 
-**Decision:** Below 36rem wide, the five navigation links sit in two rows, three above two, with thin rules between them. Wider screens keep the single row.
+**Decision:** Below 36rem, the nav links sit in two rows (three above two) with thin rules between them.
 
-**Why:** The links don't fit on one line on a phone, and letting the browser wrap them gave an unplanned break. Two rows keep every link visible without JavaScript, unlike a scrolling strip, which hides Resume and Contact off-screen, or a menu button, which is too much for five links.
+**Why:** They don't fit on one line. Two rows keep every link visible without JavaScript, unlike a scrolling strip or a menu button.
 
-**Trade-offs:** The masthead is one line taller on phones. The 3 + 2 split is fixed in CSS, so adding or removing a link means revisiting it.
+**Trade-offs:** A taller masthead on phones, and the split needs revisiting if links change.
 
 ## 2026-11-20: Keep a decision log
 
-**Decision:** Record major decisions in this file, newest first. This reverses an earlier choice not to keep one.
+**Decision:** Record major decisions here. Smaller tweaks stay in commit messages.
 
-**Why:** The repository is part of the portfolio, so the reasoning behind it should be visible, not just the result. A single file is easy to read top to bottom.
+**Why:** The repository is part of the portfolio, so its reasoning should be visible.
 
-**Trade-offs:** One more file to keep current. Smaller design tweaks, such as grain strength, stay in the commit history.
+**Trade-offs:** One more file to keep current.
 
 ## 2026-11-19: Dark mode follows the system, with a toggle
 
-**Decision:** Follow the operating system's theme until the visitor chooses one with the toggle, then remember the choice in `localStorage`. Dark mode swaps ink and paper, grain included.
+**Decision:** Follow the system theme until the visitor uses the toggle, then remember their choice. Dark mode swaps ink and paper, grain included.
 
-**Why:** Respecting the system setting is the least surprising default, and the toggle covers people who want something different for this site only.
+**Why:** The system setting is the least surprising default. An inline script applies a saved choice before first paint, so the wrong theme never flashes.
 
-**How:**
-
-- Colours are written once with `light-dark()` and resolved by `color-scheme`. Grain textures are images, which `light-dark()` doesn't accept, so they swap through selectors.
-- A small inline script in `<head>` applies a saved choice before first paint, so the wrong theme never flashes.
-- The toggle is a `<button>` with `aria-pressed`. It stays hidden without JavaScript, when the site still follows the system through CSS.
-- Theme changes cross-fade over 200 ms using the View Transitions API, which also fades the grain. The fade is skipped when reduced motion is requested or the API is unsupported.
-
-**Trade-offs:** The grain swap rules repeat the dark-mode condition, once for the system setting and once for the toggle, and the two must stay in step.
+**Trade-offs:** The grain swap is written twice, for the system setting and for the toggle, and the two must match.
 
 ## 2026-11-19: Protect `main` and squash-merge pull requests
 
-**Decision:** Every change reaches `main` through a pull request. A GitHub ruleset requires the CI check to pass and blocks direct pushes, force pushes and deletion, with no bypass list. Pull requests are squash-merged with a Conventional Commits title.
+**Decision:** Changes reach `main` only through pull requests that pass CI, squash-merged with a Conventional Commits title.
 
-**Why:** `main` deploys straight to the live site, so it must always build. Squash merging gives one clean commit per change.
+**Why:** `main` deploys straight to the live site, so it must always build.
 
-**Trade-offs:** Even one-line changes need a branch and a PR. After a squash merge, the old branch's commits no longer match `main`, so new work should start on a fresh branch.
+**Trade-offs:** Even one-line changes need a branch. Start each piece of work on a fresh branch.
 
 ## 2026-11-19: Host on GitHub Pages, deployed by GitHub Actions
 
-**Decision:** One workflow lints, checks formatting and types, and builds on every pull request and push to `main`. Pushes to `main` that pass then deploy to GitHub Pages. The repository is named `danielStacy.github.io`, so the site is served from the root.
+**Decision:** One workflow checks and builds every pull request, and deploys `main`. The repository is named `danielStacy.github.io`, so the site is served from the root.
 
-**Why:** Free hosting for a static site, and a CI/CD setup that is worth learning properly. Serving from the root avoids a `base` path, which would otherwise need adding to every internal link. The repository is public because Pages needs a paid plan for private repositories, and the code is part of the portfolio anyway.
+**Why:** Free, worth learning properly, and serving from the root avoids a `base` path on every link.
 
-**Trade-offs:** Tied to GitHub for now. A custom domain is a possible later step.
+**Trade-offs:** Tied to GitHub for now.
 
 ## 2026-11-19: Lint, format and type-check, locally and in CI
 
-**Decision:** Prettier (with its Astro plugin), ESLint (recommended rules from ESLint, typescript-eslint and eslint-plugin-astro), EditorConfig and `astro check`. Husky and lint-staged run ESLint and Prettier on staged files before each commit. CI runs the full checks.
+**Decision:** Prettier, ESLint, EditorConfig and `astro check`, with a pre-commit hook for staged files.
 
-**Why:** Consistent code without having to think about it, problems caught before review, and standard tools that are worth knowing.
+**Why:** Consistent code and early warnings, using standard tools.
 
-**Trade-offs:**
-
-- TypeScript is held at 6.0 until typescript-eslint and `@astrojs/check` support version 7.
-- `eslint-plugin-jsx-a11y` is left out because it doesn't support ESLint 10 yet. Accessibility is better tested on the built pages anyway.
-- Prettier also formats Markdown, which normalises some syntax (for example, `*emphasis*` becomes `_emphasis_`).
+**Trade-offs:** TypeScript is held at 6.0, and `eslint-plugin-jsx-a11y` is left out, until they support the current tooling.
 
 ## 2026-11-17: Self-host three typefaces with Fontsource
 
-**Decision:** Libre Caslon Text for headlines and body, IBM Plex Sans (variable) for navigation and metadata, and Playfair Display 800 for the masthead wordmark only. They are installed as Fontsource packages, and the two fonts visible on first paint are preloaded.
+**Decision:** Libre Caslon Text for text, IBM Plex Sans for navigation and metadata, and Playfair Display for the wordmark.
 
-**Why:** A classic serif for editorial reading, a clean sans for interface text, and a high-contrast display face for the wordmark. Self-hosting avoids requests to third parties, consistent with the site's no-tracking stance, and avoids the extra connection.
+**Why:** An editorial look, with no requests to third parties.
 
-**Trade-offs:** Caslon comes only in 400, 400 italic and 700, so no other weights and no bold italic. Three typefaces add page weight, which preloading only partly offsets.
+**Trade-offs:** Caslon has only 400, 400 italic and 700. Three typefaces add page weight.
 
 ## 2026-11-17: A broadsheet layout with paper grain
 
-**Decision:** A layout inspired by newspaper front pages, chosen from three mockups. It has a centred wordmark, navigation between rules, a featured article, and three recent articles in ruled columns. A subtle SVG noise texture gives the page and the wordmark a paper-like grain.
+**Decision:** A newspaper-style layout with a subtle paper grain, chosen from three mockups.
 
-**Why:** It suits a site about reading data carefully: editorial, serious, with a little character.
+**Why:** It suits a site about reading data carefully: serious, with a little character.
 
-**Trade-offs:** The wordmark's texture is clipped to the text, so it falls back to a plain colour in forced-colours mode, high-contrast mode and print, where textured text would hurt legibility.
+**Trade-offs:** The textured wordmark falls back to plain ink in high-contrast modes and print.
 
 ## 2026-11-17: Plain CSS with design tokens
 
-**Decision:** Plain CSS, with custom properties for colours, fonts and layout, plus Astro's scoped component styles. No Tailwind or other CSS framework.
+**Decision:** Plain CSS with custom properties and Astro's scoped styles. No CSS framework.
 
-**Why:** Standard, framework-free and worth learning properly. Scoped styles keep each component's CSS next to its markup.
+**Why:** Standard and worth learning properly.
 
-**Trade-offs:** No ready-made utility classes, so common patterns are written by hand.
+**Trade-offs:** Common patterns are written by hand.
 
 ## 2026-11-17: pnpm, and Node managed with nvm
 
-**Decision:** pnpm as the package manager, pinned through `packageManager` in `package.json`. Node is the current LTS (26), managed with nvm and pinned in `.nvmrc` and `engines`.
+**Decision:** pnpm for packages, and the current Node LTS pinned with nvm.
 
-**Why:** pnpm resolves dependencies strictly, and dependencies can't run install scripts by default, which suits wanting the project minimal and secure. Pinning versions keeps local machines and CI identical.
+**Why:** Strict, more secure installs, and the same versions locally and in CI.
 
-**Trade-offs:** Strict resolution means a package can only be imported if it's a direct dependency.
+**Trade-offs:** Only direct dependencies can be imported.
 
 ## 2026-11-17: Astro with TypeScript, building a static site
 
-**Decision:** Astro with static output, using its strict TypeScript preset.
+**Decision:** Astro with static output and strict TypeScript.
 
-**Why:** A content site needs very little JavaScript, and Astro ships none by default, adding interactive islands only where needed. TypeScript gives editor help and typed content schemas, so invalid article frontmatter fails the build.
+**Why:** A content site needs little JavaScript, and typed schemas catch frontmatter mistakes.
 
-**Trade-offs:** A UI framework for interactive pieces (React, Svelte or plain JavaScript) is still undecided, and will be chosen when the first interactive feature is real.
+**Trade-offs:** The framework for interactive pieces is still undecided.

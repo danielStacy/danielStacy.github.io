@@ -19,6 +19,7 @@ nvm install
 
 - [Tools](docs/tools.md): what each tool does and where it's configured
 - [Decisions](docs/decisions.md): why the site is built the way it is
+- [Adding an article](docs/adding-an-article.md): how to write and publish an article, and manage tags
 
 ## Deployment
 
