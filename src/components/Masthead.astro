@@ -110,6 +110,13 @@ const navItems = [
 		padding: 0.4rem 0;
 	}
 
+	/* Touch screens treat a tap as a hover, which would leave the underline stuck after tapping. */
+	@media (hover: none) {
+		nav a:hover {
+			text-decoration: none;
+		}
+	}
+
 	/*
 	 * The five links don't fit on one line on a phone, so split them 3 + 2 rather than wherever the
 	 * browser wraps. Six columns let the second row sit centred under the first.
