@@ -23,7 +23,7 @@ Articles are Markdown files in `src/content/articles/`, one folder per article. 
 
 5. **Fill in the frontmatter** (see [Frontmatter](#frontmatter)) and **write the article** in Markdown.
 
-6. **Check it** with `pnpm build`, which fails if the frontmatter is invalid.
+6. **Preview it** with `pnpm dev` at `http://localhost:4321/articles/<slug>/`, then **check it** with `pnpm build`, which fails if the frontmatter is invalid or an image is missing.
 
 7. **Commit** with a message like `feat: add article on renters in the Census`, then push and open a pull request. Squash-merge it once CI passes.
 
@@ -50,8 +50,8 @@ Articles use standard Markdown, plus GitHub's extensions for tables and footnote
 
 - **Headings:** start sections at `##`. The title is the page's only `#` heading.
 - **Images:** `![Alt text](./figure-1.png)`. Keep images in the article's folder. Astro resizes and compresses them at build time. Write alt text that gives the chart's takeaway, not just its type.
-- **Footnotes:** `[^1]` in the text, and `[^1]: Footnote text.` at the end of the article.
-- **Tables:** GitHub-style pipe tables.
+- **Footnotes:** `[^1]` in the text, and `[^1]: Footnote text.` at the end of the article. They're listed under "Notes" at the end of the page.
+- **Tables:** GitHub-style pipe tables. Right-align number columns with `---:`. Wide tables scroll sideways on small screens.
 
 ## Tags
 

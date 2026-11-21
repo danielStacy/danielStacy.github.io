@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-21: The article page, and configuring Astro's Markdown processor
+
+**Decision:** Article text sits in a 40rem column, with the cover wider at 48rem. Footnotes appear under a "Notes" kicker, and a small plugin wraps tables in a box that scrolls sideways. `@astrojs/markdown-satteri` is listed as a dev dependency to configure these.
+
+**Why:** Charts get room while lines stay readable. Wide data tables would otherwise overflow phones, and scrolling with CSS alone can stop screen readers treating a table as a table. Astro already uses Sätteri, so listing it adds nothing new.
+
+**Trade-offs:** Its version must stay in step with Astro's. Each table is a tab stop, even when it fits.
+
 ## 2026-11-21: The theme toggle moves into the nav on phones
 
 **Decision:** Below 36rem, the toggle fills the sixth cell of the nav grid, making a 3 × 2 grid, and its own row above the wordmark goes. Wider screens keep the toggle at the top right.
