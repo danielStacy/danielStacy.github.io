@@ -12,11 +12,12 @@ What each tool in this project does and where it's configured. For why each one 
 
 ## Site
 
-| Tool                                          | What it does                                                 | Configured in                                    | Used through                             |
-| --------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ | ---------------------------------------- |
-| [Astro](https://astro.build/)                 | Builds the static site from `.astro` components and Markdown | `astro.config.mjs`                               | `pnpm dev`, `pnpm build`, `pnpm preview` |
-| [TypeScript](https://www.typescriptlang.org/) | Types for components, scripts and content                    | `tsconfig.json`, extending Astro's strict preset | `pnpm check`                             |
-| [Fontsource](https://fontsource.org/)         | Self-hosted font files, installed as packages                | Imports in `src/layouts/BaseLayout.astro`        | —                                        |
+| Tool                                                                                          | What it does                                                                                                                 | Configured in                                    | Used through                             |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------- |
+| [Astro](https://astro.build/)                                                                 | Builds the static site from `.astro` components and Markdown                                                                 | `astro.config.mjs`                               | `pnpm dev`, `pnpm build`, `pnpm preview` |
+| [TypeScript](https://www.typescriptlang.org/)                                                 | Types for components, scripts and content                                                                                    | `tsconfig.json`, extending Astro's strict preset | `pnpm check`                             |
+| [Fontsource](https://fontsource.org/)                                                         | Self-hosted font files, installed as packages                                                                                | Imports in `src/layouts/BaseLayout.astro`        | —                                        |
+| [Sätteri](https://docs.astro.build/en/guides/markdown-content/) (`@astrojs/markdown-satteri`) | Astro's Markdown processor. Listed so its options and plugins can be configured, such as the table wrapper in `src/plugins/` | `markdown.processor` in `astro.config.mjs`       | `pnpm build`                             |
 
 ## Code quality
 
