@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-22: Projects link out instead of having their own pages
+
+**Decision:** The Projects page is a list in which each project links to its article, code, dashboard and data. Projects are an array in `src/pages/projects.astro`, and the build fails if one names an article that doesn't exist.
+
+**Why:** Most projects have an article, which already explains the work, so separate project pages would repeat it.
+
+**Trade-offs:** A project with no article gets only a summary. If several end up like that, move projects into a content collection with their own pages.
+
 ## 2026-11-21: A small circular portrait beside the About heading
 
 **Decision:** The About page shows a 96px black-and-white circular portrait just before its heading, chosen from seven mocked-up positions. It isn't used on the Resume page.
