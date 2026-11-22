@@ -95,6 +95,81 @@ function ariaCurrent(href: string) {
 		}
 	}
 
+	.wordmark a {
+		position: relative;
+	}
+
+	/* Replaced by the line below, which grows from where the pointer enters. */
+	.wordmark a:hover {
+		text-decoration: none;
+	}
+
+	/*
+	 * The hover and keyboard-focus underline, in the wordmark's grained ink. It scales from
+	 * --underline-origin, which the script sets to where the pointer enters or leaves; without the
+	 * script it grows from the centre.
+	 */
+	.wordmark a::after {
+		position: absolute;
+		inset-inline: 0;
+		/* Just under the baseline. Playfair's tall descent would otherwise put it on the tagline. */
+		top: calc(100% - 0.15em);
+		height: 2px;
+		content: '';
+		background-color: var(--ink);
+		background-image: var(--ink-grain);
+		opacity: 0;
+		transform: scaleX(0);
+		transform-origin: var(--underline-origin, 50%) center;
+	}
+
+	/* Plain ink, as for the wordmark itself. A border, because forced-colours modes drop backgrounds. */
+	@media (forced-colors: active), (prefers-contrast: more), print {
+		.wordmark a::after {
+			height: 0;
+			background: none;
+			border-top: 2px solid var(--ink);
+		}
+	}
+
+	/* Only where hovering is real; touch screens report a tap as a hover, which would leave it stuck. */
+	@media (hover: hover) {
+		.wordmark a:hover::after {
+			opacity: 1;
+			transform: scaleX(1);
+		}
+	}
+
+	.wordmark a:focus-visible::after {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+
+	/*
+	 * Grows and fades in over 150ms after a short delay, so a pointer passing on its way to the nav
+	 * doesn't set it off, then shrinks and fades out over 150ms. Keyboard focus and reduced motion show
+	 * it at once.
+	 */
+	@media (prefers-reduced-motion: no-preference) {
+		.wordmark a::after {
+			transition-property: transform, opacity;
+			transition-duration: 150ms;
+			transition-timing-function: ease-in;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+		.wordmark a:hover::after {
+			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			transition-delay: 60ms;
+		}
+	}
+
+	/* After the hover rule, so the line appears at once for keyboard focus even under the pointer. */
+	.wordmark a:focus-visible::after {
+		transition: none;
+	}
+
 	.tagline {
 		margin-top: 0.5rem;
 		font-style: italic;
@@ -244,3 +319,18 @@ function ariaCurrent(href: string) {
 		}
 	}
 </style>
+
+<script>
+	// Grows the wordmark's underline from where the pointer enters, and shrinks it to where it leaves.
+	const wordmarkLink = document.querySelector<HTMLAnchorElement>('.wordmark a');
+
+	function setOrigin(event: PointerEvent) {
+		if (!wordmarkLink) return;
+		const box = wordmarkLink.getBoundingClientRect();
+		const fraction = Math.min(Math.max((event.clientX - box.left) / box.width, 0), 1);
+		wordmarkLink.style.setProperty('--underline-origin', `${fraction * 100}%`);
+	}
+
+	wordmarkLink?.addEventListener('pointerenter', setOrigin);
+	wordmarkLink?.addEventListener('pointerleave', setOrigin);
+</script>
