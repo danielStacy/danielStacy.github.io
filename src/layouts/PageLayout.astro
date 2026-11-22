@@ -1,0 +1,62 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	kicker?: string;
+	/** A short line under the heading. */
+	intro?: string;
+	/** The heading's accessible name, where its text would be read ambiguously. */
+	titleLabel?: string;
+	/** Use 'article' when the page is one self-contained piece, such as an article. */
+	as?: 'div' | 'article';
+}
+
+const { title, description, kicker, intro, titleLabel, as: Wrapper = 'div' } = Astro.props;
+---
+
+<BaseLayout title={title} description={description ?? intro}>
+	<Wrapper class="page">
+		<header class="page__header">
+			{kicker && <p class="kicker">{kicker}</p>}
+			<div class="page__title">
+				<slot name="media" />
+				<h1 aria-label={titleLabel}>{title}</h1>
+			</div>
+			{intro && <p class="page__intro">{intro}</p>}
+			<slot name="meta" />
+		</header>
+		<slot />
+	</Wrapper>
+</BaseLayout>
+
+<style>
+	.page {
+		padding-block: 2.5rem 4rem;
+	}
+
+	.page__header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		max-width: var(--measure);
+		margin: 0 auto 2.5rem;
+	}
+
+	/* Puts media, such as the About page's portrait, just before the heading, like a byline. */
+	.page__title {
+		display: flex;
+		gap: 1.25rem;
+		align-items: center;
+	}
+
+	h1 {
+		font-size: clamp(2rem, 5vw, 2.8rem);
+	}
+
+	.page__intro {
+		font-size: 1.4rem;
+		color: var(--muted);
+	}
+</style>

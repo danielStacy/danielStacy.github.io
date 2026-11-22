@@ -1,0 +1,58 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+// Placeholder details: replace before launch.
+const channels = [
+	{ label: 'Email', text: 'hello@example.com', href: 'mailto:hello@example.com' },
+	{ label: 'LinkedIn', text: 'linkedin.com/in/your-profile', href: 'https://www.linkedin.com/' },
+	{ label: 'GitHub', text: 'github.com/your-username', href: 'https://github.com/' },
+];
+---
+
+<PageLayout
+	title="Contact"
+	intro="For roles, questions about an article, or anything else, email is the best way to reach me."
+>
+	<dl class="channels">
+		{channels.map((channel) => (
+			<div class="channel">
+				<dt class="kicker">{channel.label}</dt>
+				<dd>
+					<a href={channel.href}>{channel.text}</a>
+				</dd>
+			</div>
+		))}
+	</dl>
+</PageLayout>
+
+<style>
+	.channels {
+		max-width: var(--measure);
+		margin: 0 auto;
+		border-top: 1px solid var(--ink);
+	}
+
+	.channel {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1.5rem;
+		align-items: baseline;
+		padding-block: 1rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	dt {
+		min-width: 6rem;
+	}
+
+	dd {
+		margin: 0;
+		font-size: 1.15rem;
+	}
+
+	a {
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+	}
+</style>

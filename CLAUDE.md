@@ -109,6 +109,7 @@ src/
   layouts/      # page shells (masthead, footer)
   components/   # reusable pieces
   content/      # articles (a folder each) and the tag list; schema in src/content.config.ts
+  assets/       # images optimised at build time, such as the portrait (strip metadata first)
   styles/       # tokens, global styles, article prose styles
   plugins/      # Markdown processor plugins
   utils/        # small shared helpers

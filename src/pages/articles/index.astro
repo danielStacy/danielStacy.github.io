@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { tags } from '../../content/tags';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { formatDate } from '../../utils/formatDate';
+
+const articles = (await getCollection('articles')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<PageLayout
+	title="Articles"
+	intro="Data analysis on public Australian datasets: what they say, what they leave out, and how to read them."
+>
+	<ol class="articles" role="list">
+		{articles.map((article) => (
+			<li>
+				<article>
+					<p class="kicker">{article.data.tags.map((tag) => tags[tag]).join(', ')}</p>
+					<h2>
+						<a href={`/articles/${article.id}/`}>{article.data.title}</a>
+					</h2>
+					<p class="articles__description">{article.data.description}</p>
+					<p class="meta">
+						<time datetime={article.data.pubDate.toISOString().slice(0, 10)}>
+							{formatDate(article.data.pubDate)}
+						</time>
+					</p>
+				</article>
+			</li>
+		))}
+	</ol>
+</PageLayout>
+
+<style>
+	.articles {
+		max-width: var(--measure);
+		margin: 0 auto;
+		padding: 0;
+		border-top: 1px solid var(--ink);
+		/* Safari stops announcing unstyled lists as lists, hence role="list" in the markup. */
+		list-style: none;
+	}
+
+	li {
+		padding-block: 1.5rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	article {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	h2 {
+		font-size: 1.6rem;
+	}
+
+	.articles__description {
+		font-size: 1.1rem;
+	}
+</style>

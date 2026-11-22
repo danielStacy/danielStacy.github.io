@@ -3,7 +3,7 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import { tags } from '../../content/tags';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import '../../styles/prose.css';
 import { formatDate } from '../../utils/formatDate';
 
@@ -19,62 +19,39 @@ const { title, description, pubDate, cover, coverAlt } = article.data;
 const { Content } = await render(article);
 ---
 
-<BaseLayout title={title} description={description}>
-	<article class="article">
-		<header class="article__header">
-			<p class="kicker">{article.data.tags.map((tag) => tags[tag]).join(', ')}</p>
-			<h1>{title}</h1>
-			<p class="article__standfirst">{description}</p>
-			<p class="meta">
-				<time datetime={pubDate.toISOString().slice(0, 10)}>{formatDate(pubDate)}</time>
-			</p>
-		</header>
-		<figure class="article__cover">
-			<!-- Above the fold, so it loads straight away rather than lazily. -->
-			<Image
-				src={cover}
-				alt={coverAlt}
-				widths={[640, 960, 1280]}
-				sizes="(min-width: 48rem) 48rem, 100vw"
-				loading="eager"
-				fetchpriority="high"
-			/>
-		</figure>
-		<div class="prose">
-			<Content />
-		</div>
-	</article>
-</BaseLayout>
+<PageLayout
+	as="article"
+	title={title}
+	kicker={article.data.tags.map((tag) => tags[tag]).join(', ')}
+	intro={description}
+>
+	<p class="meta" slot="meta">
+		<time datetime={pubDate.toISOString().slice(0, 10)}>{formatDate(pubDate)}</time>
+	</p>
+	<figure class="cover">
+		<!-- Above the fold, so it loads straight away rather than lazily. -->
+		<Image
+			src={cover}
+			alt={coverAlt}
+			widths={[640, 960, 1280]}
+			sizes="(min-width: 48rem) 48rem, 100vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
+	</figure>
+	<div class="prose">
+		<Content />
+	</div>
+</PageLayout>
 
 <style>
-	.article {
-		padding-block: 2.5rem 4rem;
-	}
-
-	.article__header {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		max-width: var(--measure);
-		margin-inline: auto;
-	}
-
-	h1 {
-		font-size: clamp(2rem, 5vw, 2.8rem);
-	}
-
-	.article__standfirst {
-		font-size: 1.4rem;
-		color: var(--muted);
-	}
-
 	/* Wider than the text, so charts get room while lines stay a comfortable length. */
-	.article__cover {
+	.cover {
 		max-width: 48rem;
-		margin: 2rem auto 2.5rem;
+		margin: 0 auto 2.5rem;
 	}
 
-	.article__cover :global(img) {
+	.cover :global(img) {
 		display: block;
 		width: 100%;
 		height: auto;

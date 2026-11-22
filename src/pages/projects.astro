@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+interface Link {
+	label: string;
+	href: string;
+}
+
+interface Project {
+	/** The kind of work, shown as the kicker. */
+	kind: string;
+	title: string;
+	summary: string;
+	year: number;
+	tools: string[];
+	/** The id (folder name) of the article written from this project. */
+	article?: string;
+	links: Link[];
+	/** Where the data came from, linked to each source. */
+	data?: Link[];
+}
+
+const repository = 'https://github.com/danielStacy/danielStacy.github.io';
+
+// Sample projects: replace with real ones before launch. The last one is real.
+const projects: Project[] = [
+	{
+		kind: 'Analysis',
+		title: 'Which suburbs became less affordable to rent?',
+		summary:
+			'Compares median weekly rent with household income across Greater Sydney, using the 2016 and 2021 Censuses, and maps where the gap widened.',
+		year: 2026,
+		tools: ['Python', 'pandas', 'GeoPandas'],
+		article: 'sample-article',
+		links: [{ label: 'Code on GitHub', href: 'https://github.com/' }],
+		data: [{ label: 'ABS Census', href: 'https://www.abs.gov.au/census' }],
+	},
+	{
+		kind: 'Dashboard',
+		title: 'Hospital waiting times by state',
+		summary:
+			'An interactive dashboard of elective surgery waiting times, filterable by state, procedure and year.',
+		year: 2026,
+		tools: ['Tableau', 'SQL'],
+		links: [{ label: 'Dashboard on Tableau Public', href: 'https://public.tableau.com/' }],
+		data: [
+			{ label: 'AIHW', href: 'https://www.aihw.gov.au/' },
+			{ label: 'ABS population estimates', href: 'https://www.abs.gov.au/' },
+		],
+	},
+	{
+		kind: 'Data pipeline',
+		title: 'Census DataPacks to tidy Parquet',
+		summary:
+			'A reproducible pipeline that turns the ABS Census DataPacks into tidy, documented Parquet files, ready for analysis.',
+		year: 2025,
+		tools: ['Python', 'pandas', 'Parquet'],
+		links: [{ label: 'Code on GitHub', href: 'https://github.com/' }],
+	},
+	{
+		kind: 'Website',
+		title: 'This website',
+		summary:
+			'A static, accessible site built with Astro and plain CSS, with linting, type checks and deployment in CI, and a log of the decisions behind it.',
+		year: 2026,
+		tools: ['Astro', 'TypeScript', 'CSS', 'GitHub Actions'],
+		links: [
+			{ label: 'Code on GitHub', href: repository },
+			{ label: 'Decision log', href: `${repository}/blob/main/docs/decisions.md` },
+		],
+	},
+];
+
+// A renamed or deleted article would otherwise leave a broken link here.
+const articleIds = new Set((await getCollection('articles')).map((article) => article.id));
+for (const project of projects) {
+	if (project.article && !articleIds.has(project.article)) {
+		throw new Error(`"${project.title}" links to a missing article: ${project.article}`);
+	}
+}
+---
+
+<PageLayout
+	title="Projects"
+	intro="Data analysis projects, from raw public data to finished findings."
+>
+	<ul class="projects" role="list">
+		{projects.map((project) => (
+			<li>
+				<article>
+					<p class="kicker">{project.kind}</p>
+					<h2>{project.title}</h2>
+					<p class="projects__summary">{project.summary}</p>
+					<p class="meta">
+						{project.year} · {project.tools.join(', ')}
+					</p>
+					{project.data && (
+						<p class="meta projects__data">
+							Data:{' '}
+							{project.data.map((source, index) => (
+								<>
+									{index > 0 && ', '}
+									<a href={source.href}>{source.label}</a>
+								</>
+							))}
+						</p>
+					)}
+					<ul class="projects__links" role="list">
+						{project.article && (
+							<li>
+								<a href={`/articles/${project.article}/`}>Read the article</a>
+							</li>
+						)}
+						{project.links.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))}
+					</ul>
+				</article>
+			</li>
+		))}
+	</ul>
+</PageLayout>
+
+<style>
+	.projects {
+		max-width: var(--measure);
+		margin: 0 auto;
+		padding: 0;
+		border-top: 1px solid var(--ink);
+		/* Safari stops announcing unstyled lists as lists, hence role="list" in the markup. */
+		list-style: none;
+	}
+
+	.projects > li {
+		padding-block: 1.5rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	article {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	h2 {
+		font-size: 1.6rem;
+	}
+
+	.projects__summary {
+		font-size: 1.1rem;
+	}
+
+	.projects__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.25rem;
+		margin: 0;
+		padding: 0;
+		font-family: var(--sans);
+		font-size: 0.9rem;
+		list-style: none;
+	}
+
+	/* Underlined so they read as links without relying on colour, and tall enough to tap (WCAG 2.5.8). */
+	.projects__links a,
+	.projects__data a {
+		display: inline-block;
+		padding-block: 0.25rem;
+		text-decoration: underline;
+		text-decoration-color: var(--rule);
+		text-underline-offset: 0.2em;
+	}
+
+	.projects__links a:hover,
+	.projects__data a:hover {
+		text-decoration-color: currentcolor;
+	}
+</style>
