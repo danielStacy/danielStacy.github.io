@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-21: A small circular portrait beside the About heading
+
+**Decision:** The About page shows a 96px black-and-white circular portrait just before its heading, chosen from seven mocked-up positions. It isn't used on the Resume page.
+
+**Why:** A face builds trust with recruiters and peers, and a small byline-style photo stays editorial rather than profile-like. Australian CV conventions advise against photos on resumes.
+
+**Trade-offs:** The About heading doesn't line up with the text's left edge like other pages' headings do.
+
 ## 2026-11-21: The article page, and configuring Astro's Markdown processor
 
 **Decision:** Article text sits in a 40rem column, with the cover wider at 48rem. Footnotes appear under a "Notes" kicker, and a small plugin wraps tables in a box that scrolls sideways. `@astrojs/markdown-satteri` is listed as a dev dependency to configure these.
