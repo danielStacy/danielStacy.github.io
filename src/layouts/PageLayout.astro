@@ -19,7 +19,7 @@ const { title, description, kicker, intro, titleLabel, as: Wrapper = 'div' } = A
 <BaseLayout title={title} description={description ?? intro}>
 	<Wrapper class="page">
 		<header class="page__header">
-			{kicker && <p class="kicker">{kicker}</p>}
+			{kicker && <p class="kicker kicker--accent">{kicker}</p>}
 			<div class="page__title">
 				<slot name="media" />
 				<h1 aria-label={titleLabel}>{title}</h1>

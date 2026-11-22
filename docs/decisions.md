@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-22: Ink blue and ochre accents
+
+**Decision:** Two accents on the black and off-white palette, chosen from five mockups. Ink blue marks things to follow: tag kickers, links in article text and the current page in the nav. Ochre only highlights data in charts.
+
+**Why:** Blue reads as a link and suits a government and research audience. A separate chart colour keeps "click this" apart from "look at this", and blue and orange stay distinct for most kinds of colour blindness.
+
+**Trade-offs:** Two colours to keep consistent, and each needs a lighter dark-mode version that passes WCAG AA.
+
 ## 2026-11-22: Projects link out instead of having their own pages
 
 **Decision:** The Projects page is a list in which each project links to its article, code, dashboard and data. Projects are an array in `src/pages/projects.astro`, and the build fails if one names an article that doesn't exist.
