@@ -62,7 +62,7 @@ Home page: short about-me section, one featured article, then the three most rec
 - Reference: The New York Times website: clean, minimal, editorial. Mood: modern editorial, minimal, serious/academic, with a little playfulness. Subtle motion only, and respect `prefers-reduced-motion`.
 - Elements: masthead with the site name (Daniel Stacy), thin rules between sections, strong typographic hierarchy. Skip drop caps, date lines and multi-column front pages unless proposed and approved.
 - Typography: Libre Caslon Text for headlines and article body, IBM Plex Sans for navigation and metadata, Playfair Display for the masthead wordmark. Caslon has only 400, 400 italic and 700, so don't use other weights or bold italic.
-- Colour: black, off-white, and one or two subtle accents, defined as CSS custom properties with light and dark variants. Contrast must meet WCAG AA in both themes.
+- Colour: black, off-white, and two subtle accents, defined as CSS custom properties with light and dark variants in `src/styles/global.css`. Ink blue (`--accent`) is for things to follow: tag kickers, links in article text and the current page in the nav. Ochre (`--chart-highlight`) is only for highlighting data in charts. Don't spread either further without asking. Contrast must meet WCAG AA in both themes.
 - Article body is a single readable column (about 60-75 characters per line).
 - No logo yet; the masthead wordmark is the brand.
 - Design polish is the top priority, followed by performance and accessibility, then learning the tools properly, then getting articles online.
@@ -138,4 +138,3 @@ The pre-commit hook runs ESLint and Prettier on staged files only.
 
 - Custom domain, and a budget for domain and hosting (research needed).
 - Which UI framework, if any, for interactive pieces.
-- Final colour palette.
