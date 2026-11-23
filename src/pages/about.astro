@@ -12,16 +12,17 @@ import '../styles/prose.css';
 	title="About"
 	intro="I’m a data analyst who writes about public datasets: what they say, what they leave out, and how to read them carefully."
 >
-	<Image
-		slot="media"
-		class="portrait"
-		src={portrait}
-		alt="Daniel Stacy"
-		width={96}
-		height={96}
-		densities={[1, 2, 3]}
-		loading="eager"
-	/>
+	<Fragment slot="media">
+		<Image
+			class="portrait"
+			src={portrait}
+			alt="Daniel Stacy"
+			width={96}
+			height={96}
+			densities={[1, 2, 3]}
+			loading="eager"
+		/>
+	</Fragment>
 	<div class="prose">
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut

@@ -1,12 +1,13 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 
-// Placeholder details: replace before launch.
+// Placeholder details: replace before launch. Date spans take an unspaced en dash (2022–2024), as in
+// the Australian Government Style Manual.
 const experience = [
 	{
 		role: 'Data Analyst',
 		organisation: 'Organisation name',
-		dates: '2024 – present',
+		dates: '2024–present',
 		points: [
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 			'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -15,7 +16,7 @@ const experience = [
 	{
 		role: 'Graduate Analyst',
 		organisation: 'Organisation name',
-		dates: '2022 – 2024',
+		dates: '2022–2024',
 		points: [
 			'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
 			'Duis aute irure dolor in reprehenderit in voluptate velit esse.',
@@ -27,7 +28,7 @@ const education = [
 	{
 		qualification: 'Bachelor of Computer Science',
 		institution: 'University name',
-		dates: '2018 – 2021',
+		dates: '2018–2021',
 	},
 ];
 
@@ -46,7 +47,7 @@ const skills = ['Python', 'pandas', 'SQL', 'Tableau', 'Parquet', 'JavaScript', '
 		<section>
 			<h2 class="kicker">Experience</h2>
 			{experience.map((job) => (
-				<article class="entry">
+				<div class="entry">
 					<h3>{job.role}</h3>
 					<p class="meta">
 						{job.organisation} · {job.dates}
@@ -56,19 +57,19 @@ const skills = ['Python', 'pandas', 'SQL', 'Tableau', 'Parquet', 'JavaScript', '
 							<li>{point}</li>
 						))}
 					</ul>
-				</article>
+				</div>
 			))}
 		</section>
 
 		<section>
 			<h2 class="kicker">Education</h2>
 			{education.map((item) => (
-				<article class="entry">
+				<div class="entry">
 					<h3>{item.qualification}</h3>
 					<p class="meta">
 						{item.institution} · {item.dates}
 					</p>
-				</article>
+				</div>
 			))}
 		</section>
 
