@@ -41,9 +41,9 @@ Data work (Python, pandas, Parquet, Tableau) happens outside this site. This rep
 
 ## Features
 
-**In scope:** Tags/categories, footnotes, image optimisation (`astro:assets`), dark mode (follows system setting, plus a manual toggle that avoids a flash of the wrong theme), 404 page.
+**In scope:** Tags/categories, footnotes, image optimisation (`astro:assets`), dark mode (follows system setting, plus a manual toggle that avoids a flash of the wrong theme), 404 page, link previews (Open Graph tags: each article's cover, and `public/site-card.png` for other pages).
 
-**Maybe later (don't build unprompted):** filter by category/date once there are many articles, interactive charts, custom domain, privacy-friendly analytics, RSS/sitemap, Open Graph cards, unit and end-to-end tests, newsletter.
+**Maybe later (don't build unprompted):** filter by category/date once there are many articles, interactive charts, custom domain, privacy-friendly analytics, RSS/sitemap, unit and end-to-end tests, newsletter.
 
 **Not wanted:** comments, multi-author support, reading time, series, anything unnecessary.
 

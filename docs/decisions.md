@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-23: Link previews from article covers and a site card
+
+**Decision:** Every page has Open Graph tags, so shared links show a title, description and image. Articles use their cover, cropped to 1200 × 630 at build time. Other pages use one site card: the wordmark and tagline on paper, in `public/site-card.png`.
+
+**Why:** Articles will be shared on LinkedIn, where a preview without an image is easy to scroll past. One card covers the other pages without extra dependencies.
+
+**Trade-offs:** Covers must be PNG or JPEG, and previews crop their edges. The site card is a fixed image, so it needs remaking if the wordmark or tagline changes.
+
 ## 2026-11-22: Ink blue and ochre accents
 
 **Decision:** Two accents on the black and off-white palette, chosen from five mockups. Ink blue marks things to follow: tag kickers, links in article text and the current page in the nav. Ochre only highlights data in charts.

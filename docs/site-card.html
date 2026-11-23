@@ -1,0 +1,72 @@
+<!doctype html>
+<!--
+	Source for public/site-card.png, the link preview image for pages without their own.
+
+	To remake it, screenshot this page at 1200 × 630, for example with
+	firefox --headless --window-size=1200,630 --screenshot site-card.png docs/site-card.html
+	then replace public/site-card.png. Fonts come from Google Fonts here, because browsers won't load
+	local font files from node_modules; this file is never part of the site.
+-->
+<html lang="en-AU">
+	<head>
+		<meta charset="utf-8" />
+		<title>Site card</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600&family=Libre+Caslon+Text:ital@1&family=Playfair+Display:wght@800&display=block"
+		/>
+		<style>
+			html,
+			body {
+				width: 1200px;
+				height: 630px;
+				margin: 0;
+				overflow: hidden;
+			}
+
+			body {
+				display: grid;
+				place-content: center;
+				justify-items: center;
+				background: #faf9f6;
+				color: #121212;
+				text-align: center;
+			}
+
+			.wordmark {
+				font-family: 'Playfair Display', serif;
+				font-size: 168px;
+				font-weight: 800;
+				letter-spacing: -0.02em;
+				line-height: 1;
+			}
+
+			.tagline {
+				margin-top: 22px;
+				font-family: 'Libre Caslon Text', serif;
+				font-size: 40px;
+				font-style: italic;
+				color: #5c5c5c;
+			}
+
+			/* The masthead's single and double rules. */
+			.band {
+				width: 880px;
+				margin-top: 56px;
+				padding: 16px 0;
+				border-top: 2px solid #121212;
+				border-bottom: 6px double #121212;
+				font-family: 'IBM Plex Sans', sans-serif;
+				font-size: 22px;
+				font-weight: 600;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wordmark">Daniel Stacy</div>
+		<div class="tagline">Data analysis on public Australian datasets</div>
+		<div class="band">danielstacy.github.io</div>
+	</body>
+</html>
