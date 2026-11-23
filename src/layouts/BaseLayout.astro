@@ -26,7 +26,7 @@ const pageTitle = title ? `${title} · Daniel Stacy` : 'Daniel Stacy';
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<meta name="color-scheme" content="light dark" />
-		<!-- Applies a saved theme before first paint, so the other theme never flashes. -->
+		{/* Applies a saved theme before first paint, so the other theme never flashes. */}
 		<script is:inline>
 			try {
 				const theme = localStorage.getItem('theme');
@@ -38,7 +38,7 @@ const pageTitle = title ? `${title} · Daniel Stacy` : 'Daniel Stacy';
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<!-- Body text and the wordmark are visible on first paint, so fetch them before the CSS asks. -->
+		{/* Body text and the wordmark are visible on first paint, so fetch them before the CSS asks. */}
 		<link rel="preload" href={caslonRegular} as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href={playfairBold} as="font" type="font/woff2" crossorigin />
 		<title>{pageTitle}</title>

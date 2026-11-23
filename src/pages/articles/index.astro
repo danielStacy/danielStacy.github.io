@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { tags } from '../../content/tags';
+import { tagLabels } from '../../content/tags';
 import PageLayout from '../../layouts/PageLayout.astro';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate, isoDate } from '../../utils/formatDate';
 
 const articles = (await getCollection('articles')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -17,17 +17,13 @@ const articles = (await getCollection('articles')).sort(
 		{articles.map((article) => (
 			<li>
 				<article>
-					<p class="kicker kicker--accent">
-						{article.data.tags.map((tag) => tags[tag]).join(', ')}
-					</p>
+					<p class="kicker kicker--accent">{tagLabels(article.data.tags)}</p>
 					<h2>
 						<a href={`/articles/${article.id}/`}>{article.data.title}</a>
 					</h2>
 					<p class="articles__description">{article.data.description}</p>
 					<p class="meta">
-						<time datetime={article.data.pubDate.toISOString().slice(0, 10)}>
-							{formatDate(article.data.pubDate)}
-						</time>
+						<time datetime={isoDate(article.data.pubDate)}>{formatDate(article.data.pubDate)}</time>
 					</p>
 				</article>
 			</li>

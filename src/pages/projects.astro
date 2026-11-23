@@ -164,18 +164,26 @@ for (const project of projects) {
 		list-style: none;
 	}
 
-	/* Underlined so they read as links without relying on colour, and tall enough to tap (WCAG 2.5.8). */
+	/*
+	 * Underlined so they read as links without relying on colour, and tall enough to tap (WCAG 2.5.8).
+	 * The underline is the links' only cue, so it needs 3:1 contrast with the paper (WCAG 1.4.11).
+	 */
 	.projects__links a,
 	.projects__data a {
 		display: inline-block;
 		padding-block: 0.25rem;
 		text-decoration: underline;
-		text-decoration-color: var(--rule);
+		text-decoration-color: var(--muted);
 		text-underline-offset: 0.2em;
 	}
 
 	.projects__links a:hover,
 	.projects__data a:hover {
 		text-decoration-color: currentcolor;
+	}
+
+	/* Ink, so the sources stand out from the grey "Data:" label. */
+	.projects__data a {
+		color: var(--ink);
 	}
 </style>

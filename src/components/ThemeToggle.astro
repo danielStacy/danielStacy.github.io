@@ -7,7 +7,7 @@ interface Props {
 const { stretch = false } = Astro.props;
 ---
 
-<!-- Hidden until the script runs: without JavaScript the site follows the system setting. -->
+{/* Hidden until the script runs: without JavaScript the site follows the system setting. */}
 <button
 	class:list={['theme-toggle', { 'theme-toggle--stretch': stretch }]}
 	type="button"
@@ -92,12 +92,15 @@ const { stretch = false } = Astro.props;
 		font-weight: 600;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
+		white-space: nowrap;
 		cursor: pointer;
 		/* The icon's turn is the tap feedback, so the browser's grey box isn't needed. */
 		-webkit-tap-highlight-color: transparent;
 	}
 
+	/* A size container, so the icon can give way when the cell is narrow (see below). */
 	.theme-toggle--stretch {
+		container-type: inline-size;
 		justify-content: center;
 		width: 100%;
 		height: 100%;
@@ -117,8 +120,19 @@ const { stretch = false } = Astro.props;
 	}
 
 	.theme-toggle__icon {
+		flex-shrink: 0;
 		width: 0.9rem;
 		height: 0.9rem;
+	}
+
+	/*
+	 * In a narrow nav cell, such as a 320px screen with a scrollbar or with larger text, drop the icon
+	 * rather than wrap or clip the label. The label names the control, and aria-pressed gives its state.
+	 */
+	@container (width < 6rem) {
+		.theme-toggle__icon {
+			display: none;
+		}
 	}
 
 	/* Flip the filled half to show the state; a little motion, only for those who haven't opted out. */
@@ -128,7 +142,7 @@ const { stretch = false } = Astro.props;
 
 	@media (prefers-reduced-motion: no-preference) {
 		.theme-toggle__icon {
-			transition: transform 0.3s ease;
+			transition: transform 300ms ease;
 		}
 	}
 

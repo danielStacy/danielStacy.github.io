@@ -9,3 +9,6 @@ export const formatDate = (date: Date) =>
 		year: 'numeric',
 		timeZone: 'UTC',
 	});
+
+/** The date as YYYY-MM-DD, for a <time> element's datetime attribute. */
+export const isoDate = (date: Date) => date.toISOString().slice(0, 10);

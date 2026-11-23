@@ -1,4 +1,4 @@
-# Daniel Stacy: (new) Homepage
+# Daniel Stacy
 
 [![CI](https://github.com/danielStacy/danielStacy.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/danielStacy/danielStacy.github.io/actions/workflows/ci.yml)
 
@@ -6,14 +6,17 @@ Source for my personal website. Hosts my resume, data analysis projects, and art
 
 Live at [danielstacy.github.io](https://danielstacy.github.io/).
 
-## Prerequisites
+## Running locally
 
-- [nvm](https://github.com/nvm-sh/nvm), to install the Node version pinned in `.nvmrc`
-- [pnpm](https://pnpm.io/)
+Needs [nvm](https://github.com/nvm-sh/nvm) and [pnpm](https://pnpm.io/).
 
 ```sh
-nvm install
+nvm install    # installs and uses the Node version in .nvmrc
+pnpm install   # installs dependencies and the pre-commit hook
+pnpm dev       # serves the site at http://localhost:4321
 ```
+
+`pnpm build` builds the site into `dist/`, and `pnpm preview` serves that build.
 
 ## Documentation
 

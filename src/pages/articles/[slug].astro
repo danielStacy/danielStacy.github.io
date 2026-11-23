@@ -2,10 +2,10 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
-import { tags } from '../../content/tags';
+import { tagLabels } from '../../content/tags';
 import PageLayout from '../../layouts/PageLayout.astro';
 import '../../styles/prose.css';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate, isoDate } from '../../utils/formatDate';
 
 export const getStaticPaths = (async () => {
 	const articles = await getCollection('articles');
@@ -19,17 +19,12 @@ const { title, description, pubDate, cover, coverAlt } = article.data;
 const { Content } = await render(article);
 ---
 
-<PageLayout
-	as="article"
-	title={title}
-	kicker={article.data.tags.map((tag) => tags[tag]).join(', ')}
-	intro={description}
->
+<PageLayout as="article" title={title} kicker={tagLabels(article.data.tags)} intro={description}>
 	<p class="meta" slot="meta">
-		<time datetime={pubDate.toISOString().slice(0, 10)}>{formatDate(pubDate)}</time>
+		<time datetime={isoDate(pubDate)}>{formatDate(pubDate)}</time>
 	</p>
 	<figure class="cover">
-		<!-- Above the fold, so it loads straight away rather than lazily. -->
+		{/* Above the fold, so it loads straight away rather than lazily. */}
 		<Image
 			src={cover}
 			alt={coverAlt}
