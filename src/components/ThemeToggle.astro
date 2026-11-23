@@ -7,7 +7,7 @@ interface Props {
 const { stretch = false } = Astro.props;
 ---
 
-<!-- Hidden until the script runs: without JavaScript the site follows the system setting. -->
+{/* Hidden until the script runs: without JavaScript the site follows the system setting. */}
 <button
 	class:list={['theme-toggle', { 'theme-toggle--stretch': stretch }]}
 	type="button"

@@ -29,7 +29,7 @@ const { Content } = await render(article);
 		<time datetime={pubDate.toISOString().slice(0, 10)}>{formatDate(pubDate)}</time>
 	</p>
 	<figure class="cover">
-		<!-- Above the fold, so it loads straight away rather than lazily. -->
+		{/* Above the fold, so it loads straight away rather than lazily. */}
 		<Image
 			src={cover}
 			alt={coverAlt}
