@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import { tagLabels } from '../../content/tags';
 import PageLayout from '../../layouts/PageLayout.astro';
@@ -17,9 +17,22 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { article } = Astro.props;
 const { title, description, pubDate, cover, coverAlt } = article.data;
 const { Content } = await render(article);
+
+// Link previews show the cover cropped to 1200 × 630, the 1.91:1 shape LinkedIn uses, as a JPEG.
+// Astro won't convert SVG, so an SVG cover (only the sample article's) leaves the site card instead.
+const preview =
+	cover.format === 'svg'
+		? undefined
+		: await getImage({ src: cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 ---
 
-<PageLayout as="article" title={title} kicker={tagLabels(article.data.tags)} intro={description}>
+<PageLayout
+	as="article"
+	title={title}
+	kicker={tagLabels(article.data.tags)}
+	intro={description}
+	shareImage={preview && { src: preview.src, width: 1200, height: 630, alt: coverAlt }}
+>
 	<p class="meta" slot="meta">
 		<time datetime={isoDate(pubDate)}>{formatDate(pubDate)}</time>
 	</p>

@@ -11,7 +11,7 @@ Articles are Markdown files in `src/content/articles/`, one folder per article. 
    git switch -c feat/article-renters-census
    ```
 
-2. **Create the article's folder** in `src/content/articles/`. The folder name is the article's slug, which becomes its URL (`/articles/renters-census/`).Renaming after publishing will cause links to the article will break.
+2. **Create the article's folder** in `src/content/articles/`. The folder name is the article's slug, which becomes its URL (`/articles/renters-census/`). Renaming after publishing will cause links to the article will break.
 
 3. **Copy the template** into the folder as `index.md`:
 
@@ -27,20 +27,22 @@ Articles are Markdown files in `src/content/articles/`, one folder per article. 
 
 7. **Commit** with a message like `feat: add article on renters in the Census`, then push and open a pull request. Squash-merge it once CI passes.
 
+8. **Check the link preview** once the site has deployed, by pasting the article's URL into [LinkedIn's Post Inspector](https://www.linkedin.com/post-inspector/). It shows the title and cropped cover that a shared link will display, and refreshes LinkedIn's cached copy.
+
 The newest article is featured on the home page automatically.
 
 ## Frontmatter
 
 The frontmatter is the block between the `---` lines at the top of `index.md`. The schema in `src/content.config.ts` checks it on every build. All fields are required.
 
-| Field         | What to write                                                             |
-| ------------- | ------------------------------------------------------------------------- |
-| `title`       | The headline, in sentence case                                            |
-| `description` | One or two sentences, shown in article lists and search results           |
-| `pubDate`     | The publication date, as `YYYY-MM-DD`                                     |
-| `tags`        | At least one tag key from the [tag list](#tags)                           |
-| `cover`       | The cover image's path, relative to `index.md`, for example `./cover.png` |
-| `coverAlt`    | Alt text for what the cover image shows. Required for every cover         |
+| Field         | What to write                                                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title`       | The headline, in sentence case                                                                                                                                                       |
+| `description` | One or two sentences, shown in article lists and search results                                                                                                                      |
+| `pubDate`     | The publication date, as `YYYY-MM-DD`                                                                                                                                                |
+| `tags`        | At least one tag key from the [tag list](#tags)                                                                                                                                      |
+| `cover`       | The cover image's path, relative to `index.md`, for example `./cover.png`. Use PNG or JPEG. Link previews crop it to 1200 × 630 from the centre, so keep the subject near the middle |
+| `coverAlt`    | Alt text for what the cover image shows. Required for every cover                                                                                                                    |
 
 If a field is missing or wrong, the build stops and names the article and the field.
 
