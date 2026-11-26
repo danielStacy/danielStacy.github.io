@@ -27,3 +27,7 @@ pnpm dev       # serves the site at http://localhost:4321
 ## Deployment
 
 The [CI workflow](.github/workflows/ci.yml) runs on every pull request and every push to `main`. It installs dependencies, lints, checks formatting and types, and builds the site. Pushes to `main` that pass are deployed to GitHub Pages.
+
+## Licence
+
+The code is available under the [MIT Licence](LICENCE). The articles, images and personal details, such as the portrait and resume, are not covered by it: they are © Daniel Stacy, all rights reserved.
