@@ -9,6 +9,7 @@ Major decisions, newest first. When one changes, add a new entry and mark the ol
 **Why:** A cover can be reopened and remade later, and the source sits outside `src/` and `public/`, so it's never built or deployed.
 
 **Trade-offs:** Git keeps every committed version of a binary file in full, so sources are committed only when finished, and kept small.
+
 ## 2026-11-26: MIT licence for the code only
 
 **Decision:** The code is under the MIT Licence, in `LICENCE`. The README excludes the articles, images and personal details, which stay all rights reserved.
