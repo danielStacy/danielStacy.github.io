@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-26: MIT licence for the code only
+
+**Decision:** The code is under the MIT Licence, in `LICENCE`. The README excludes the articles, images and personal details, which stay all rights reserved.
+
+**Why:** A public portfolio repository with no licence looks unfinished, and MIT is the most widely recognised permissive licence. The writing, portrait and resume are personal, so they stay under my control.
+
+**Trade-offs:** Anyone can reuse the code without asking. Articles could later move to CC BY 4.0 so they can be shared with credit; a licence, once granted, can't easily be withdrawn, so starting restrictive is safer.
+
 ## 2026-11-23: Link previews from article covers and a site card
 
 **Decision:** Every page has Open Graph tags, so shared links show a title, description and image. Articles use their cover, cropped to 1200 × 630 at build time. Other pages use one site card: the wordmark and tagline on paper, in `public/site-card.png`.
