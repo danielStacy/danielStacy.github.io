@@ -20,12 +20,18 @@
 	 * Tiled SVG noise. In each colour matrix the second-last value sets strength; in the coarse grains
 	 * the 0.4 or 0.35 constants set the speck grey (sRGB, so about #666 or #595959). Strength and colour
 	 * are baked into each image, so dark mode has its own copies.
+	 *
+	 * The scattered grain is a larger, sparser layer over the fine one. Its alpha is 0.5 × noise − 0.358
+	 * (0.43 and 0.31 in dark mode), so only the noise's peaks leave a mark. Its 307px tile doesn't line
+	 * up with the 200px ones, so the repeats don't form a grid.
 	 */
 	--grain-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	--grain-fine-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	--grain-coarse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	--grain-coarse-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-	--paper-grain: var(--grain-fine);
+	--grain-scattered: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='307' height='307'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.242' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 -0.358'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--grain-scattered-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='307' height='307'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.242' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0.4267 -0.3055'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	--paper-grain: var(--grain-scattered), var(--grain-fine);
 	--ink-grain: var(--grain-coarse);
 	--page-width: 72rem;
 	/* Article text width: about 76 characters per line in Caslon at 1.25rem. */
@@ -44,13 +50,13 @@
 /* light-dark() only accepts colours, so the grain images are swapped with selectors. */
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme='light']) {
-		--paper-grain: var(--grain-coarse-dark);
+		--paper-grain: var(--grain-scattered-dark), var(--grain-coarse-dark);
 		--ink-grain: var(--grain-fine-dark);
 	}
 }
 
 :root[data-theme='dark'] {
-	--paper-grain: var(--grain-coarse-dark);
+	--paper-grain: var(--grain-scattered-dark), var(--grain-coarse-dark);
 	--ink-grain: var(--grain-fine-dark);
 }
 

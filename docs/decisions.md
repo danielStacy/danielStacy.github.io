@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-26: Scattered grain over the paper
+
+**Decision:** A second, sparser grain sits over the fine paper grain in both themes: small soft specks where the noise peaks, about a tenth of the noise. Chosen from mockups of larger grain, flecks and mottle, then four versions of the scattered grain. This adds to "A broadsheet layout with paper grain" (2026-11-17).
+
+**Why:** The fine grain alone read as an even texture. Sparse, larger grains look more like real paper without competing with the text.
+
+**Trade-offs:** One more tiled image to draw, at 307px. Values are baked into each image, so tuning means regenerating the SVG, in both themes.
+
 ## 2026-11-26: Image sources kept in `design/`
 
 **Decision:** Working files for images, such as GIMP `.xcf` covers, live in `design/covers/`. Only the exported PNG or JPEG goes in the article folder.
