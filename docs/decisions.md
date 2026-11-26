@@ -9,6 +9,13 @@ Major decisions, newest first. When one changes, add a new entry and mark the ol
 **Why:** A public portfolio repository with no licence looks unfinished, and MIT is the most widely recognised permissive licence. The writing, portrait and resume are personal, so they stay under my control.
 
 **Trade-offs:** Anyone can reuse the code without asking. Articles could later move to CC BY 4.0 so they can be shared with credit; a licence, once granted, can't easily be withdrawn, so starting restrictive is safer.
+## 2026-11-26: A wider text column
+
+**Decision:** The text column (`--measure`) widens from 40rem to 46rem, about 76 characters per line in an article. The token is shared, so the Articles, Projects, Resume and Contact pages widen with it. This supersedes the column width in "The article page" (2026-11-21).
+
+**Why:** At 40rem the column looked narrow on wide screens, with no sidebar or advertisements beside it.
+
+**Trade-offs:** Lines run a little past the usual 60–75 characters, so long paragraphs are slightly harder to follow. The cover, at 48rem, is now only just wider than the text.
 
 ## 2026-11-23: Link previews from article covers and a site card
 
@@ -44,7 +51,7 @@ Major decisions, newest first. When one changes, add a new entry and mark the ol
 
 ## 2026-11-21: The article page, and configuring Astro's Markdown processor
 
-**Decision:** Article text sits in a 40rem column, with the cover wider at 48rem. Footnotes appear under a "Notes" kicker, and a small plugin wraps tables in a box that scrolls sideways. `@astrojs/markdown-satteri` is listed as a dev dependency to configure these.
+**Decision:** (Column width superseded on 2026-11-26.) Article text sits in a 40rem column, with the cover wider at 48rem. Footnotes appear under a "Notes" kicker, and a small plugin wraps tables in a box that scrolls sideways. `@astrojs/markdown-satteri` is listed as a dev dependency to configure these.
 
 **Why:** Charts get room while lines stay readable. Wide data tables would otherwise overflow phones, and scrolling with CSS alone can stop screen readers treating a table as a table. Astro already uses Sätteri, so listing it adds nothing new.
 
