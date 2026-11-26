@@ -8,17 +8,12 @@ const { stretch = false } = Astro.props;
 ---
 
 {/* Hidden until the script runs: without JavaScript the site follows the system setting. */}
-<button
-	class:list={['theme-toggle', { 'theme-toggle--stretch': stretch }]}
-	type="button"
-	aria-pressed="false"
-	hidden
->
+<button class:list={['theme-toggle', { 'theme-toggle--stretch': stretch }]} type="button" hidden>
 	<svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
 		<circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
 		<path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path>
 	</svg>
-	Dark mode
+	<span class="theme-toggle__label">Dark mode</span>
 </button>
 
 <script>
@@ -42,9 +37,15 @@ const { stretch = false } = Astro.props;
 		}
 	}
 
+	// A changing label with aria-pressed would contradict itself ("Light mode, pressed" in dark mode),
+	// so the label alone tells everyone what the button does.
 	function syncButtons() {
-		const pressed = String(currentTheme() === 'dark');
-		buttons.forEach((button) => button.setAttribute('aria-pressed', pressed));
+		const theme = currentTheme();
+		buttons.forEach((button) => {
+			button.dataset.current = theme;
+			const label = button.querySelector('.theme-toggle__label');
+			if (label) label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+		});
 	}
 
 	function applyTheme(theme: Theme) {
@@ -127,7 +128,7 @@ const { stretch = false } = Astro.props;
 
 	/*
 	 * In a narrow nav cell, such as a 320px screen with a scrollbar or with larger text, drop the icon
-	 * rather than wrap or clip the label. The label names the control, and aria-pressed gives its state.
+	 * rather than wrap or clip the label. The label alone names the control and what it does.
 	 */
 	@container (width < 6rem) {
 		.theme-toggle__icon {
@@ -136,7 +137,7 @@ const { stretch = false } = Astro.props;
 	}
 
 	/* Flip the filled half to show the state; a little motion, only for those who haven't opted out. */
-	[aria-pressed='true'] .theme-toggle__icon {
+	[data-current='dark'] .theme-toggle__icon {
 		transform: rotate(180deg);
 	}
 
