@@ -19,7 +19,7 @@ Articles are Markdown files in `src/content/articles/`, one folder per article. 
    cp docs/article-template.md src/content/articles/renters-census/index.md
    ```
 
-4. **Add the images** to the same folder: the cover, plus any charts exported from the analysis.
+4. **Add the images** to the same folder: the cover, plus any charts exported from the analysis. Keep working files, such as a GIMP `.xcf`, in `design/covers/` and export a PNG or JPEG here.
 
 5. **Fill in the frontmatter** (see [Frontmatter](#frontmatter)) and **write the article** in Markdown.
 

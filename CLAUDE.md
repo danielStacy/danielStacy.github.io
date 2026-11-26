@@ -114,6 +114,7 @@ src/
   plugins/      # Markdown processor plugins
   utils/        # small shared helpers
 public/         # static assets
+design/         # source files for images, such as GIMP covers; never built or deployed
 docs/           # decision log and tools overview
 ```
 
