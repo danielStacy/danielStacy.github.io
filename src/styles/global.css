@@ -28,8 +28,8 @@
 	--paper-grain: var(--grain-fine);
 	--ink-grain: var(--grain-coarse);
 	--page-width: 72rem;
-	/* Article text width: about 67 characters per line in Caslon at 1.25rem. */
-	--measure: 40rem;
+	/* Article text width: about 76 characters per line in Caslon at 1.25rem. */
+	--measure: 46rem;
 	--gutter: 1rem;
 }
 

@@ -35,14 +35,14 @@ The newest article is featured on the home page automatically.
 
 The frontmatter is the block between the `---` lines at the top of `index.md`. The schema in `src/content.config.ts` checks it on every build. All fields are required.
 
-| Field         | What to write                                                                                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `title`       | The headline, in sentence case                                                                                                                                                       |
-| `description` | One or two sentences, shown in article lists and search results                                                                                                                      |
-| `pubDate`     | The publication date, as `YYYY-MM-DD`                                                                                                                                                |
-| `tags`        | At least one tag key from the [tag list](#tags)                                                                                                                                      |
-| `cover`       | The cover image's path, relative to `index.md`, for example `./cover.png`. Use PNG or JPEG. Link previews crop it to 1200 × 630 from the centre, so keep the subject near the middle |
-| `coverAlt`    | Alt text for what the cover image shows. Required for every cover                                                                                                                    |
+| Field         | What to write                                                                                                                                                                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | The headline, in sentence case                                                                                                                                                                                                                                                  |
+| `description` | One or two sentences, shown in article lists and search results                                                                                                                                                                                                                 |
+| `pubDate`     | The publication date, as `YYYY-MM-DD`                                                                                                                                                                                                                                           |
+| `tags`        | At least one tag key from the [tag list](#tags)                                                                                                                                                                                                                                 |
+| `cover`       | The cover image's path, relative to `index.md`, for example `./cover.png`. Use PNG (charts) or JPEG (photos), 16:9 and at least 1600 × 900, with metadata stripped. Link previews crop it to 1200 × 630 from the centre, so keep the subject away from the top and bottom edges |
+| `coverAlt`    | Alt text for what the cover image shows. Required for every cover                                                                                                                                                                                                               |
 
 If a field is missing or wrong, the build stops and names the article and the field.
 
