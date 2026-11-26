@@ -9,6 +9,7 @@ Major decisions, newest first. When one changes, add a new entry and mark the ol
 **Why:** A public portfolio repository with no licence looks unfinished, and MIT is the most widely recognised permissive licence. The writing, portrait and resume are personal, so they stay under my control.
 
 **Trade-offs:** Anyone can reuse the code without asking. Articles could later move to CC BY 4.0 so they can be shared with credit; a licence, once granted, can't easily be withdrawn, so starting restrictive is safer.
+
 ## 2026-11-26: A wider text column
 
 **Decision:** The text column (`--measure`) widens from 40rem to 46rem, about 76 characters per line in an article. The token is shared, so the Articles, Projects, Resume and Contact pages widen with it. This supersedes the column width in "The article page" (2026-11-21).
