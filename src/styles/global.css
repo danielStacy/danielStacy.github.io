@@ -31,7 +31,9 @@
 	--grain-coarse-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	--grain-scattered: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='307' height='307'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.242' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 -0.358'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	--grain-scattered-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='307' height='307'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.242' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0 0.35 0 0 0 0.4267 -0.3055'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-	--paper-grain: var(--grain-scattered), var(--grain-fine);
+	/* The paper without the scattered layer, for text to sit on (see .prose p in prose.css). */
+	--paper-base-grain: var(--grain-fine);
+	--paper-grain: var(--grain-scattered), var(--paper-base-grain);
 	--ink-grain: var(--grain-coarse);
 	--page-width: 72rem;
 	/* Article text width: about 76 characters per line in Caslon at 1.25rem. */
@@ -50,13 +52,15 @@
 /* light-dark() only accepts colours, so the grain images are swapped with selectors. */
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme='light']) {
-		--paper-grain: var(--grain-scattered-dark), var(--grain-coarse-dark);
+		--paper-base-grain: var(--grain-coarse-dark);
+		--paper-grain: var(--grain-scattered-dark), var(--paper-base-grain);
 		--ink-grain: var(--grain-fine-dark);
 	}
 }
 
 :root[data-theme='dark'] {
-	--paper-grain: var(--grain-scattered-dark), var(--grain-coarse-dark);
+	--paper-base-grain: var(--grain-coarse-dark);
+	--paper-grain: var(--grain-scattered-dark), var(--paper-base-grain);
 	--ink-grain: var(--grain-fine-dark);
 }
 

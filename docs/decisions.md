@@ -2,6 +2,14 @@
 
 Major decisions, newest first. When one changes, add a new entry and mark the old one as superseded.
 
+## 2026-11-27: Less scattered grain behind paragraphs
+
+**Decision:** In article and About text, each paragraph lays a half-strength layer of paper and the base grain over the page, so the scattered grain shows at about half strength behind text. The layer fades out past the paragraph's edges. Chosen from a mockup comparing hidden, reduced and unchanged, with and without faded edges. This adjusts "Scattered grain over the paper" (2026-11-26).
+
+**Why:** Flecks behind letters compete with the text. Halving them keeps the paper's character while giving text a quieter ground, and the fade avoids clean bands that would outline each paragraph.
+
+**Trade-offs:** One extra layer per paragraph to draw. Headings and lists keep the full grain, so the difference is slight by design. The paragraph's fine grain doesn't line up with the page's, which the noise hides.
+
 ## 2026-11-26: Scattered grain over the paper
 
 **Decision:** A second, sparser grain sits over the fine paper grain in both themes: small soft specks where the noise peaks, about a tenth of the noise. Chosen from mockups of larger grain, flecks and mottle, then four versions of the scattered grain. This adds to "A broadsheet layout with paper grain" (2026-11-17).
