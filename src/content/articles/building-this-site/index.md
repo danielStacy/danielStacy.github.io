@@ -1,7 +1,7 @@
 ---
 title: 'Building this website'
 description: 'Building my own website: the decisions behind a small, careful portfolio website.'
-pubDate: 2026-11-26
+pubDate: 2026-11-27
 tags: ['technical']
 cover: './cover.png'
 coverAlt: 'This website in both desktop and mobile view'
