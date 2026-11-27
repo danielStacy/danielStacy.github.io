@@ -5,7 +5,7 @@ description: 'What the article finds, and why it matters.'
 # YYYY-MM-DD
 pubDate: 2026-01-31
 # At least one tag from src/content/tags.ts, written in lowercase
-tags: ['census']
+tags: ['technical']
 cover: ./cover.png
 coverAlt: 'Bar chart of ...'
 ---

@@ -61,15 +61,8 @@ The allowed tags are listed in `src/content/tags.ts`:
 
 ```ts
 export const tags = {
-	census: 'Census',
-	employment: 'Employment',
-	housing: 'Housing',
-	methods: 'Methods',
+	technical: 'Technical',
 } as const;
 ```
 
 The key on the left is what you write in frontmatter and what appears in the tag's URL. Use lowercase words separated by hyphens. The label on the right is what readers see.
-
-## The sample article
-
-`src/content/articles/sample-article/` is lorem ipsum, used to test the layout. Delete its folder when the first real article is published.
