@@ -19,7 +19,7 @@ const { title, description, pubDate, cover, coverAlt } = article.data;
 const { Content } = await render(article);
 
 // Link previews show the cover cropped to 1200 × 630, the 1.91:1 shape LinkedIn uses, as a JPEG.
-// Astro won't convert SVG, so an SVG cover (only the sample article's) leaves the site card instead.
+// Astro won't convert SVG, so an SVG cover leaves the site card instead.
 const preview =
 	cover.format === 'svg'
 		? undefined

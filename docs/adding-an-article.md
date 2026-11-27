@@ -69,7 +69,3 @@ export const tags = {
 ```
 
 The key on the left is what you write in frontmatter and what appears in the tag's URL. Use lowercase words separated by hyphens. The label on the right is what readers see.
-
-## The sample article
-
-`src/content/articles/sample-article/` is lorem ipsum, used to test the layout. Delete its folder when the first real article is published.
