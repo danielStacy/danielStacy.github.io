@@ -61,10 +61,7 @@ The allowed tags are listed in `src/content/tags.ts`:
 
 ```ts
 export const tags = {
-	census: 'Census',
-	employment: 'Employment',
-	housing: 'Housing',
-	methods: 'Methods',
+	technical: 'Technical',
 } as const;
 ```
 
