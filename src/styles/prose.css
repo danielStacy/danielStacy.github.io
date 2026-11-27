@@ -29,6 +29,30 @@
 	margin-top: 0.75em;
 }
 
+/*
+ * Paragraphs half-cover the scattered grain, so running text sits on a quieter ground. The cover
+ * reaches past each paragraph and fades out, so the flecks thin out rather than stop at a hard edge.
+ */
+.prose p {
+	position: relative;
+	isolation: isolate;
+}
+
+.prose p::before {
+	content: '';
+	position: absolute;
+	inset: -0.4lh -0.75rem;
+	z-index: -1;
+	background-color: var(--paper);
+	background-image: var(--paper-base-grain);
+	opacity: 0.5;
+	pointer-events: none;
+	mask-image:
+		linear-gradient(to bottom, transparent, #000 0.4lh, #000 calc(100% - 0.4lh), transparent),
+		linear-gradient(to right, transparent, #000 0.75rem, #000 calc(100% - 0.75rem), transparent);
+	mask-composite: intersect;
+}
+
 /* Underlined as well as coloured, because colour alone can't mark a link in body text. */
 .prose a {
 	color: var(--accent);
